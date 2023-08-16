@@ -11,7 +11,9 @@ const home = () => {
         status: ''
     })
 
-    
+    const test = () => {
+        alert('test')
+    }
 
     useEffect(() => {
         axios.get('http://localhost:5000/api/users/1')
