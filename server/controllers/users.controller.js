@@ -1,26 +1,26 @@
-const {model} = require('mongoose');
-const Users = model('../models/users.model');
+// const { model } = require('mongoose');
+const User = require('../models/users.model');
 
-model.exports.findAllUsers = (req, res) => {
-    Users.find()
+module.exports.findAllUsers = (req, res) => {
+    User.find()
     .then((allUsers) => res.json({users: allUsers}))
     .catch(err => res.json({message: "Something went wrong", error: err}));
 }
 
-model.exports.findOneSingleUser = (req, res) => {
-    Users.findOne({_id: req.params.id})
-    .then(oneSingleUser => res.json({user: oneSingleUser}))
-    .catch(err => res.json({message: "Something went wrong", error: err}));
-}
 
-model.exports.createNewUser = (req, res) => {
-    Users.create(req.body)
+module.exports.createNewUser = (req, res) => {
+    User.create(req.body)
     .then(newlyCreatedUser => res.json({user: newlyCreatedUser}))
     .catch(err => res.json({message: "Something went wrong", error: err}));
 }
 
-model.exports.updateExistingUser = (req, res) => {
-    Users.findOneAndUpdate(
+module.exports.findOneSingleUser = (req, res) => {
+    User.findOne({_id: req.params.id})
+    .then(oneSingleUser => res.json({user: oneSingleUser}))
+    .catch(err => res.json({message: "Something went wrong", error: err}));
+}
+module.exports.updateExistingUser = (req, res) => {
+    User.findOneAndUpdate(
         {_id: req.params.id},
 
         req.body,
@@ -32,14 +32,14 @@ model.exports.updateExistingUser = (req, res) => {
     .catch(err => res.json({message: "Something went wrong", error: err}));
 }
 
-model.exports.deleteAnExistingUser = (req, res) => {
-    Users.deleteOne({_id: req.params.id})
+module.exports.deleteAnExistingUser = (req, res) => {
+    User.deleteOne({_id: req.params.id})
     .then(result => res.json({result: result}))
     .catch(err => res.json({message: "Something went wrong", error: err}));
 }
 
-model.exports.findUserByEmail = (req, res) => {
-    Users.findOne({email: req.params.email})
+module.exports.findUserByEmail = (req, res) => {
+    User.findOne({email: req.params.email})
     .then(user => res.json({user: user}))
     .catch(err => res.json({message: "Something went wrong", error: err}));
 }
