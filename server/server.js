@@ -10,7 +10,7 @@ app.use(express.json(), express.urlencoded({ extended: true }));
 
 app.use(cors());
 
-const AllMyUserRoutes = require('./routes/user.routes');
+const AllMyUserRoutes = require('./routes/users.routes');
 
 AllMyUserRoutes(app);
 
