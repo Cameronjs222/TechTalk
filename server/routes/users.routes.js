@@ -2,9 +2,9 @@ const UsersController = require('../controllers/users.controller');
 
 module.exports = (app) => {
 
-    app.get('/api/users', UsersController.getAllUsers);
+    app.get('/api/users', UsersController.findAllUsers);
 
-    app.get('/api/users/:id', UsersController.findUserById);
+    app.get('/api/users/:id', UsersController.findOneSingleUser);
 
     app.get('/api/users/:email', UsersController.findUserByEmail);
 
