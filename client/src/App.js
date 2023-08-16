@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Home from "./components/Home"
+import Home from "./components/home"
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 
 function App() {
