@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import Home from "./components/Home"
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 
 function App() {
@@ -8,10 +9,7 @@ function App() {
      <BrowserRouter>
       <Routes>
         <Route path = '/' element = {<Navigate to = '/'></Navigate>}></Route>
-        <Route path = '/' element = {"Compenent titles for each page"}></Route>
-        <Route path = '/' element = {"Compenent titles for each page"}></Route>
-        <Route path = '/' element = {"Compenent titles for each page"}></Route>
-        <Route path = '/' element = {"Compenent titles for each page"}></Route>
+        <Route path = '/home' element = {<Home/>}></Route>
       </Routes>
       </BrowserRouter>
     </div>

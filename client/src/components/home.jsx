@@ -1,8 +1,9 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 
-const home = () => {
+const Home = () => {
 
+<<<<<<< HEAD
     const [user, setUser] = useState({
         name: '',
         email: '',
@@ -83,3 +84,13 @@ const home = () => {
 }
 
     export default home
+=======
+return (
+
+
+    <h1>Hello world</h1>
+)
+}
+
+export default Home
+>>>>>>> CameronShaffer
