@@ -11,6 +11,23 @@ const home = () => {
         status: ''
     })
 
+    function deleteUser() {
+        axios.delete('http://localhost:5000/api/users/1')
+            .then(res => {
+                setUser({
+                    name: res.data.name,
+                    email: res.data.email,  
+                    id: res.data.id,
+                    role: res.data.role,
+                    status: res.data.status
+                })
+            }
+            )
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     function createUser() {
         axios.post('http://localhost:5000/api/users/1')
             .then(res => {
@@ -63,5 +80,6 @@ const home = () => {
             </div>
         )
     }
+}
 
     export default home
