@@ -15,10 +15,12 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
-    followers:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'User'
-    }],
+    followers:[
+        {
+        userId: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
+        userName: String
+    }
+],
     following:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
