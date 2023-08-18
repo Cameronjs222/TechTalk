@@ -8,10 +8,10 @@ import LoginReg from './components/LoginReg';
 function App() {
   return (
     <div className="App">
-      <LoginReg />
+
      <BrowserRouter>
       <Routes>
-        <Route path = '/' element = {<Navigate to = '/'></Navigate>}></Route>
+        <Route path ="/" element = {<LoginReg />}></Route>
         <Route path = '/home' element = {<Home/>}></Route>
         <Route path = '/viewPost' element = {<ViewPost/>}></Route>
       </Routes>
