@@ -1,3 +1,8 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
 .App {
   text-align: center;
 }
@@ -36,3 +41,48 @@
     transform: rotate(360deg);
   }
 }
+
+
+/* For Log in and Registration */
+.logregmain{
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to left,#c66358 0%, #c66358 50%, #f5e7e0 50%, #f5e7e0 100%);
+}
+
+.logTitle{
+  font-family: 'Tilt Prism', cursive;
+}
+
+.mainCont{
+  display: flex;
+  justify-content: flex-start;
+}
+
+
+
+/* For Login */
+
+.logForm{
+  width: 50%;
+  margin: auto;
+}
+
+.logLeft{
+  width: 50%;
+  height: 100% auto;
+  background-color: #f5e7e0;
+
+}
+
+.regRight{
+  width: 50%;
+  height: 100%;
+  background-color: #c66358;
+}
+
+#logo1{
+  width: 50%;
+}
+
+
