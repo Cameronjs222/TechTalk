@@ -21,31 +21,31 @@ const Home = () => {
       });
   }, []);
 
-  const addFollower = () => {
-    const updatedCurrentUser = { ...currentUser };
-    updatedCurrentUser.followers.push(users[1]);
-    console.log(updatedCurrentUser);
+  // const addFollower = () => {
+  //   const updatedCurrentUser = { ...currentUser };
+  //   updatedCurrentUser.followers.push(users[1]);
+  //   console.log(updatedCurrentUser);
   
-    const followersData = updatedCurrentUser.followers.map(follower => ({
-      userId: follower._id,
-      userName: follower.name
-    }));
+  //   const followersData = updatedCurrentUser.followers.map(follower => ({
+  //     userId: follower._id,
+  //     userName: follower.name
+  //   }));
   
-    axios.patch(`http://localhost:8000/api/users/${currentUser._id}`, {
-      followers: followersData
-    })
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  };
+  //   axios.patch(`http://localhost:8000/api/users/${currentUser._id}`, {
+  //     followers: followersData
+  //   })
+  //   .then(res => {
+  //     console.log(res);
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //   });
+  // };
   
 
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <button onClick={addFollower}>Add followers</button>
+      {/* <button onClick={addFollower}>Add followers</button> */}
       <div style={{ border: "2px solid black", backgroundColor: "grey", width: "auto", padding: '0 10%', marginLeft: '10vw', height: "30vh", overflow: "scroll" }}>
         <h2>Community Post</h2>
         {users.map(user => (
