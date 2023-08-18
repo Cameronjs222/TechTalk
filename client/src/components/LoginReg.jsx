@@ -136,9 +136,9 @@ const LoginReg = () => {
                     <br />
                 <button type='submit' className='btn btn-dark'>Register</button>
             </form>
-            {regErrors.name ? <p className='text-danger'>{regErrors.name}</p> : ""}
-            {regErrors.email ? <p className='text-danger'>{regErrors.email}</p> : ""}
-            {regErrors.password ? <p className='text-danger'>{regErrors.password}</p> : ""}
+            {regErrors.name ? <p>{regErrors.name}</p> : ""}
+            {regErrors.email ? <p>{regErrors.email}</p> : ""}
+            {regErrors.password ? <p>{regErrors.password}</p> : ""}
             {regErrors.password !== regErrors.confirmPass ? <p>Password does not match</p> : null}
         </div>
     </div>
