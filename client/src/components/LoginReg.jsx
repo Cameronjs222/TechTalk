@@ -7,8 +7,9 @@ import axios from 'axios';
 
 const LoginReg = () => {
     
-       
+//---------//       
 //  LOGIN  //
+//---------//
        
         const [userLogin, setUserLogin] = useState({
             name: "",
@@ -32,8 +33,9 @@ const LoginReg = () => {
     
     
     
-    
+ //-------------------//
  //   REGISTRATION   //
+ //------------------//
        
     
         const [userReg, setUserReg] = useState({
