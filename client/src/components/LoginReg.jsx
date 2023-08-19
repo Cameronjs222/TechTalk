@@ -94,14 +94,14 @@ const LoginReg = () => {
             
             <form className='logForm'>
                 
-                <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
-                    <label for="floatingInput">Email address</label>
+                <div className="form-floating mb-3">
+                    <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
+                    <label htmlFor="floatingInput">Email address</label>
                 </div>
 
-                <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
-                    <label for="floatingPassword">Password</label>
+                <div className="form-floating">
+                    <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
+                    <label htmlFor="floatingPassword">Password</label>
                 </div>
                     <br />
                 <button type='submit' className='btn btn-dark'>Login</button>
@@ -114,24 +114,24 @@ const LoginReg = () => {
             <form action="" className='logForm' onSubmit={regSubmit}>
                 
 
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="Full Name"  onChange={regChangeHandler}/>
-                    <label for="floatingInput" htmlFor='name'>Full Name</label>
+                <div className="form-floating mb-3">
+                    <input type="text" className="form-control" id="floatingInput" name="name"placeholder="Full Name"  onChange={regChangeHandler}/>
+                    <label htmlFor="name">Full Name</label>
                 </div>
 
-                <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" onChange={regChangeHandler}/>
-                    <label for="floatingInput">Email address</label>
+                <div className="form-floating mb-3">
+                    <input type="email" className="form-control" id="floatingInput" name="email" placeholder="name@example.com" onChange={regChangeHandler}/>
+                    <label htmlFor="email">Email address</label>
                 </div>
 
-                <div class="form-floating mb-3">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" onChange={regChangeHandler} />
-                    <label for="floatingPassword">Password</label>
+                <div className="form-floating mb-3">
+                    <input type="password" className="form-control" id="floatingPassword" name="password" placeholder="Password" onChange={regChangeHandler} />
+                    <label htmlFor="password">Password</label>
                 </div>
 
-                <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" onChange={regChangeHandler} />
-                    <label for="floatingPassword">Password</label>
+                <div className="form-floating">
+                    <input type="password" className="form-control" id="floatingPassword" name="confirmPass" placeholder="Password" onChange={regChangeHandler} />
+                    <label htmlFor="confirmPass">Password</label>
                 </div>
                     <br />
                 <button type='submit' className='btn btn-dark'>Register</button>

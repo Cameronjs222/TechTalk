@@ -20,16 +20,18 @@ const userSchema = new mongoose.Schema({
         required: [true, "Full Name is required"],
         minlength: [2, "Full Name must at least be 2 characters long"]
     },
-    followers:[
-        {
-        userId: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
-        userName: String
-    }
-],
+    followers:[{
+        type: mongoose.Schema.Types.ObjectId, 
+        ref:'User'
+    }],
     following:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
-    }]
+    }],
+    posts:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Post'
+    }],
 },{
     timestamps:true
 });
