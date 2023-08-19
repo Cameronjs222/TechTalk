@@ -1,9 +1,47 @@
 //Made by Jonathan
 //this is the page that displays the individual post and the ability to make a comment on it
 import React from 'react';
+import {useState, useEffect} from 'react';
+import {useParams} from 'react-router-dom';
+import axios from 'axios';
 
 
 const ViewPost = () => {
+
+    const {id} = useParams();
+    const [post, setPost] = useState({});
+    const [comment, setComment] = useState({});
+
+    useEffect(() => {
+        axios.get(`http://localhost:8000/api/post/${id}`)
+            .then(res => {
+                setPost(res.data)
+            })
+            .catch(err => console.log(err))
+    }, [])
+
+    useEffect(() => {
+        axios.get("http://localhost:8000/api/comment")
+            .then(res => {
+                setComment(res.data)
+            })
+            .catch(err => console.log(err))
+    }, [])
+
+    function onChangeHandler(e){
+        setComment({
+            ...comment,
+            [e.target.name]: e.target.value
+        })
+    }
+
+
+    function submitComment(e){
+        e.preventDefault();
+        axios.post("http://localhost:8000/api/comment", comment)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+    }
 
 
     return (
@@ -36,9 +74,9 @@ const ViewPost = () => {
                         {/*end for loop */}
                     </div>
                     <div>
-                        <form action="">
-                            <label htmlFor="comment">Comment:</label>
-                            <input type="text" name="comment" />
+                        <form action={submitComment}>
+                            <label htmlFor="content">Comment:</label>
+                            <input type="text" name="content" onChange={onChangeHandler}/>
                             <input type="submit" value="Post Comment" />
                         </form>
                     </div>
