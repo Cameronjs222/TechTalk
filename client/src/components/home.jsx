@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import logo from '../img/logo2-4.jpg';
 
 const Home = () => {
   const [users, setUsers] = useState([]);
@@ -74,28 +75,39 @@ const Home = () => {
   
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      {/* <button onClick={addFollower}>Add followers</button> */}
-      <div style={{border: "2px solid black", }}>
-        <h2>Followers</h2>
+    <div className='mainDivHome'>
+      <div className='navBar'>
+          <img src={logo} alt='Logo' id='logo2'/>
+          <div className='navLinks'>
+
+              <a href=""><button className='addP'>Add a Post</button></a>
+              <a href=""><button className='allP'>All Posts</button></a>
+              <a href=""><button className='myP'>My Post</button></a>
+      
+          </div>
+          <div className='userLink'>
+              <p>Welcome "logged in user's name" </p>
+              <a href="/updateuser?">Update Account Info</a> | <a href="/logout?">Logout</a>
+          </div>
       </div>
-      <div style={{ border: "2px solid black", 
-      backgroundColor: "grey", 
-      width: "auto", 
-      padding: '0 10%', 
-      marginLeft: '10vw', 
-      height: "30vh", 
-      overflow: "scroll",
-      }}>
-        <h2>Community Post</h2>
-        {users.map(user => (
-          <Link to={`/user/${user._id}`} key={user._id}>
-            <div key={user._id} style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
-              <span>Today's post by {user.name}, id is {user._id}</span>
-              <span>User post: {user.post}</span>
-            </div>
-          </Link>
-        ))}
+
+      <div className='homeMain'>
+      {/* <button onClick={addFollower}>Add followers</button> */}
+        <div className='hmFollow'>
+          <h2>Followers</h2>
+        </div>
+
+        <div className='allPost'>
+          <h2>Community Post</h2>
+          {users.map(user => (
+            <Link to={`/user/${user._id}`} key={user._id}>
+              <div key={user._id} style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
+                <span>Today's post by {user.name}, id is {user._id}</span>
+                <span>User post: {user.post}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
