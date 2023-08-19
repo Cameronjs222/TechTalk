@@ -97,7 +97,8 @@
 
 /* VIEW POST */
 
-.vpMain{
+.vpMain,
+.mainDivHome{
   width: 100%;
   height: 100vh;
   background-color: #f5e7e0;
@@ -281,4 +282,32 @@
 #postComment{
   border-radius: 15px;
   border: #c66358 2px solid;
+}
+
+
+/* HOME.JSX */
+.homeMain{
+  width: 60%;
+  display: flex;
+  margin: auto;
+  gap: 20px;
+  margin-top: 2%;
+}
+
+.hmFollow,
+.allPost{
+  margin: auto;
+}
+
+.hmFollow{
+  background-color: yellow;
+  height: 600px;
+  width: 200px;
+
+}
+
+.allPost{
+  background-color:#a1a9b9;
+  height: 600px;
+  width: 900px;
 }
