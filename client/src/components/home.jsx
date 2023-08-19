@@ -94,19 +94,31 @@ const Home = () => {
       <div className='homeMain'>
       {/* <button onClick={addFollower}>Add followers</button> */}
         <div className='hmFollow'>
-          <h2>Followers</h2>
+          <div className='h2follow'><h2>Following</h2></div>
+          <div className='listFollow'>
+            <ul>
+                   {/* Link each of the users to their profile. Create an if statment */}
+              <li>Fatuma</li> <li>Onsira</li> <li>Cameron</li> <li>Jonathan</li><li>Jackie</li>
+              <li>Fatuma</li> <li>Onsira</li> <li>Cameron</li> <li>Jonathan</li><li>Jackie</li>
+              <li>Fatuma</li> <li>Onsira</li> <li>Cameron</li> <li>Jonathan</li><li>Jackie</li>
+              <li>Fatuma</li> <li>Onsira</li> <li>Cameron</li> <li>Jonathan</li><li>Jackie</li>
+              <li>Fatuma</li> <li>Onsira</li> <li>Cameron</li> <li>Jonathan</li><li>Jackie</li>
+            </ul>
+          </div>
         </div>
 
         <div className='allPost'>
-          <h2>Community Post</h2>
-          {users.map(user => (
-            <Link to={`/user/${user._id}`} key={user._id}>
-              <div key={user._id} style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
-                <span>Today's post by {user.name}, id is {user._id}</span>
-                <span>User post: {user.post}</span>
-              </div>
-            </Link>
-          ))}
+          <div className='comPost'><h2>Community Post</h2></div>
+          <div>
+            {users.map(user => (
+              <Link to={`/user/${user._id}`} key={user._id}>
+                <div key={user._id} style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
+                  <span>Today's post by {user.name}, id is {user._id}</span>
+                  <span>User post: {user.post}</span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </div>
