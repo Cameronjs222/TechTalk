@@ -83,7 +83,7 @@ const ViewPost = () => {
                                 09/23/2023 at 1:45 PM
                             </div> <br />
 {/* just to see how it looks like when theres more comments */}
-                            <div className='comnts'><p className='icom'>comment text Here! comment text Here! comment text Here! comment text Here! comment text Here! comment text Here! comment text Here! comment text Here!</p></div>
+                            <div className='comnts'><p className='icom'>ce! comment tntr text Here! comment text Here!</p></div>
                             <div className='comUser'>
                                 Comment by: "comment's owner" <br />
                                 09/23/2023 at 1:45 PM
