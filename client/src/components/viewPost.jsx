@@ -7,6 +7,7 @@ import axios from 'axios';
 import logo from '../img/logo2-4.jpg';
 
 
+
 const ViewPost = () => {
 
     const {id} = useParams();
@@ -92,6 +93,7 @@ const ViewPost = () => {
         
                         {/*end for loop */}
                     </div>
+
                     <div >
                         <form action={submitComment}>
                             <div className='form-floating mb-3'>
@@ -99,6 +101,13 @@ const ViewPost = () => {
                                 <label htmlFor="content">Comment:</label>
                             </div>
                             <button type='submit' className='btn btn-dark'>Post Comment</button>
+
+                    <div>
+                        <form action={submitComment}>
+                            <label htmlFor="content">Comment:</label>
+                            <input type="text" name="content" onChange={onChangeHandler}/>
+                            <input type="submit" value="Post Comment" />
+
                         </form>
                     </div>
                 </div>
