@@ -4,6 +4,7 @@ import Home from "./components/home"
 import ViewPost from "./components/viewPost"
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 import LoginReg from './components/LoginReg';
+import EditUser from './components/EditUser';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path = '/' element = {<Navigate to = '/login'></Navigate>}></Route>
         <Route path = '/home' element = {<Home/>}></Route>
         <Route path = '/viewPost' element = {<ViewPost/>}></Route>
+        <Route path = '/EditUser' element = {<EditUser/>}></Route>
       </Routes>
       </BrowserRouter>
     </div>
