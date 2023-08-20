@@ -5,13 +5,14 @@
 
 .App {
   text-align: center;
+  
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-
+ 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -50,10 +51,6 @@
   background: linear-gradient(to left,#c66358 0%, #c66358 50%, #f5e7e0 50%, #f5e7e0 100%);
 }
 
-.logTitle{
-  font-family: 'Tilt Prism', cursive;
-}
-
 .mainCont{
   display: flex;
   justify-content: flex-start;
@@ -66,12 +63,14 @@
 .logForm{
   width: 50%;
   margin: auto;
+  margin-top: 20px;
 }
 
 .logLeft{
   width: 50%;
   height: 100% auto;
   background-color: #f5e7e0;
+  margin-top: 8%;
 
 }
 
@@ -83,6 +82,15 @@
 
 #logo1{
   width: 50%;
+  margin-bottom: 20px;
 }
 
+
+
+.regText {
+  font-family: 'Rozha One', serif;
+  margin-top: 20%;
+  color: #f5e7e0;
+  padding-bottom: 20px;
+}
 
