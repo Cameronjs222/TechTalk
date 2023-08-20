@@ -7,12 +7,15 @@ const Home = () => {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
   const [following, setFollowing] = useState([]);
+  const [post, setPost] = useState([]);
   // console.log(users);
   // console.log("^users^");
-  console.log(currentUser);
-  console.log("^currentUser^");
-  console.log(following);
-  console.log("^followers^");
+  // console.log(currentUser);
+  // console.log("^currentUser^");
+  // console.log(following);
+  // console.log("^followers^");
+  console.log(post);
+  console.log("^post^");
 
   useEffect(() => {
     const getUsers = async () => {
@@ -25,6 +28,18 @@ const Home = () => {
           console.log(err);
         })
     };
+
+    const getPost = async () => {
+      axios.get('http://localhost:8000/api/post')
+        .then(res => {
+          setPost(res.data.posts);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }
+
+    getPost();
     getUsers();
   }, []);
 
@@ -52,6 +67,17 @@ const Home = () => {
 
     getFollowingList();
   }, [currentUser]);
+
+  // const deletePost = (id) => {
+  //   axios.delete(`http://localhost:8000/api/post/${id}`)
+  //     .then(res => {
+  //       console.log(res.data);
+  //       setPost(post.filter(post => post._id !== id));
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     })
+  // }
 
 
   return (
@@ -93,11 +119,11 @@ const Home = () => {
         <div className='allPost'>
           <div className='comPost'><h2>Community Post</h2></div>
           <div>
-            {users.map(user => (
-              <Link to={`/user/${user._id}`} key={user._id}>
-                <div key={user._id} style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
-                  <span>Today's post by {user.name}, id is {user._id}</span>
-                  <span>User post: {user.post}</span>
+            {post.map(post => (
+              <Link className='postLink' to={`/viewPost/${post._id}`} key={post._id}>
+                <div key={post._id} className='singlePost' style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
+                  <span>Today's post by {post.user_name}: {post.title}</span>
+                  <span>{post.content}</span>
                 </div>
               </Link>
             ))}
