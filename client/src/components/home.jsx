@@ -74,20 +74,22 @@ const Home = () => {
   
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: "100vh" }}>
       {/* <button onClick={addFollower}>Add followers</button> */}
       <div style={{border: "2px solid black", }}>
         <h2>Followers</h2>
       </div>
+
+      <div style={{display: "flex", alignItems: "center", justifyContent: "center", flexDirection: 'column'}}>
+        <h2>Community Post</h2>
+
       <div style={{ border: "2px solid black", 
       backgroundColor: "grey", 
       width: "auto", 
       padding: '0 10%', 
-      marginLeft: '10vw', 
       height: "30vh", 
       overflow: "scroll",
-      }}>
-        <h2>Community Post</h2>
+    }}>
         {users.map(user => (
           <Link to={`/user/${user._id}`} key={user._id}>
             <div key={user._id} style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
@@ -96,6 +98,7 @@ const Home = () => {
             </div>
           </Link>
         ))}
+      </div>
       </div>
     </div>
   );
