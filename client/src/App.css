@@ -356,3 +356,16 @@
   color: #f5e7e0;
   padding: 3px;
 }
+
+.singlePost {
+  background-color: #f5e7e0;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
+  box-shadow: 5px 5px 5px gray;
+}
+
+.postLink{
+  text-decoration: none;
+  color: #c66358;
+}
