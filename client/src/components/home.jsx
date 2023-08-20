@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import logo from '../img/logo2-4.jpg';
 
 const Home = () => {
   const [users, setUsers] = useState([]);
@@ -74,30 +75,51 @@ const Home = () => {
   
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: "100vh" }}>
-      {/* <button onClick={addFollower}>Add followers</button> */}
-      <div style={{border: "2px solid black", }}>
-        <h2>Followers</h2>
+    <div className='mainDivHome'>
+      <div className='navBar'>
+          <img src={logo} alt='Logo' id='logo2'/>
+          <div className='navLinks'>
+
+              <a href=""><button className='addP'>Add a Post</button></a>
+              <a href=""><button className='allP'>All Posts</button></a>
+              <a href=""><button className='myP'>My Post</button></a>
+      
+          </div>
+          <div className='userLink'>
+              <p>Welcome "logged in user's name" </p>
+              <a href="/updateuser?">Update Account Info</a> | <a href="/logout?">Logout</a>
+          </div>
       </div>
 
-      <div style={{display: "flex", alignItems: "center", justifyContent: "center", flexDirection: 'column'}}>
-        <h2>Community Post</h2>
+      <div className='homeMain'>
+      {/* <button onClick={addFollower}>Add followers</button> */}
+        <div className='hmFollow'>
+          <div className='h2follow'><h2>Following</h2></div>
+          <div className='listFollow'>
+            <ul>
+                   {/* Link each of the users to their profile. Create an if statment */}
+              <li>Fatuma</li> <li>Onsira</li> <li>Cameron</li> <li>Jonathan</li><li>Jackie</li>
+              <li>Fatuma</li> <li>Onsira</li> <li>Cameron</li> <li>Jonathan</li><li>Jackie</li>
+              <li>Fatuma</li> <li>Onsira</li> <li>Cameron</li> <li>Jonathan</li><li>Jackie</li>
+              <li>Fatuma</li> <li>Onsira</li> <li>Cameron</li> <li>Jonathan</li><li>Jackie</li>
+              <li>Fatuma</li> <li>Onsira</li> <li>Cameron</li> <li>Jonathan</li><li>Jackie</li>
+            </ul>
+          </div>
+        </div>
 
-      <div style={{ border: "2px solid black", 
-      backgroundColor: "grey", 
-      width: "auto", 
-      padding: '0 10%', 
-      height: "30vh", 
-      overflow: "scroll",
-    }}>
-        {users.map(user => (
-          <Link to={`/user/${user._id}`} key={user._id}>
-            <div key={user._id} style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
-              <span>Today's post by {user.name}, id is {user._id}</span>
-              <span>User post: {user.post}</span>
-            </div>
-          </Link>
-        ))}
+        <div className='allPost'>
+          <div className='comPost'><h2>Community Post</h2></div>
+          <div>
+            {users.map(user => (
+              <Link to={`/user/${user._id}`} key={user._id}>
+                <div key={user._id} style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
+                  <span>Today's post by {user.name}, id is {user._id}</span>
+                  <span>User post: {user.post}</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
       </div>
     </div>
