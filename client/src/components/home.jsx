@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import logo from '../img/logo2-4.jpg';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
-const Home = () => {
+
+const Home = ({currentUser, setCurrentUser}) => {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
   const [following, setFollowing] = useState([]);
@@ -13,6 +16,17 @@ const Home = () => {
   console.log("^currentUser^");
   console.log(following);
   console.log("^followers^");
+  
+  function logOut() {
+    axios.post('http://localhost:8000/api/users/logout', { withCredentials: true })
+      .then(res => {
+        console.log(res)
+        navigate("/")
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
 
   useEffect(() => {
     const getUsers = async () => {
@@ -54,6 +68,7 @@ const Home = () => {
   }, [currentUser]);
 
 
+
   return (
     <div className='mainDivHome'>
       <div className='navBar'>
@@ -66,8 +81,11 @@ const Home = () => {
 
         </div>
         <div className='userLink'>
-          <p>Welcome "logged in user's name" </p>
-          <a href="/updateuser?">Update Account Info</a> | <a href="/logout?">Logout</a>
+
+          <p>Welcome {currentUser.name} </p>
+          <a href="/updateuser?">Update Account Info</a> | <button onClick={logOut}>Logout</button>
+          
+
         </div>
       </div>
 
@@ -91,6 +109,7 @@ const Home = () => {
         </div>
 
         <div className='allPost'>
+
           <div className='comPost'><h2>Community Post</h2></div>
           <div>
             {users.map(user => (
