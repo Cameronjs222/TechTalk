@@ -3,16 +3,29 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 const EditUser = (props) => {
-
     const {id} = useParams();
+    const [name, setName] = useState([])
+    const [email, setEmail] = useState([])
+    const [password, setPassword] = useState([])
+    const [user, setUser] = useState({
+        name: "",
+        email: "",
+        password: ""
+    })
+
     const navigate = useNavigate();
-    const [user, setUser] = useState([])
 
     useEffect( ()=> {
         axios.get(`http://localhost:8000/api/users/${id}`)
-            .then(res => setUser(res.data.user))
+            .then(res => {
+                console.log(res.data);
+                setName(res.data.name);
+                setEmail(res.data.email);
+                setPassword(res.data.password);
+            })       
             .catch(err=> console.log(err))
-    }, [])
+        })
+    
 
     const onChangeHandler = (e) => {
         setUser({

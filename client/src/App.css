@@ -290,24 +290,69 @@
   width: 60%;
   display: flex;
   margin: auto;
-  gap: 20px;
+  gap: 30px;
   margin-top: 2%;
 }
 
 .hmFollow,
 .allPost{
   margin: auto;
+  font-family: 'Rozha One', serif;
 }
 
 .hmFollow{
-  background-color: yellow;
+  background-color: #c66358;
   height: 600px;
-  width: 200px;
+  width: 250px;
+  border-radius: 15px;
 
 }
 
 .allPost{
-  background-color:#a1a9b9;
+  background-color:whitesmoke;
   height: 600px;
   width: 900px;
+  border-radius: 15px;
+  border: 2px dotted #c66358;
+
+}
+
+.h2follow{
+  background-color: #f5e7e0;
+  border-radius: 10px;
+  color: #c66358;
+  margin: 8px;
+}
+
+.listFollow{
+  background-color: #c66358;
+  margin: auto;
+  height: 500px;
+  margin-top: 20px;
+  width: 200px;
+  text-align: left;
+  overflow: auto;
+  color: #f5e7e0;
+}
+
+.listFollow::-webkit-scrollbar {
+  width: 10px;
+}
+
+.listFollow::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color: #c66358;
+  border: 1px solid c;
+}
+
+.listFollow::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: #f5e7e0;
+}
+
+.comPost{
+  background-color: #c66358;
+  border-radius: 10px;
+  color: #f5e7e0;
+  padding: 3px;
 }
