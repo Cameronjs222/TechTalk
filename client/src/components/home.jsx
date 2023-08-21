@@ -11,15 +11,13 @@ const Home = () => {
   const [users, setUsers] = useState([]);
   const [following, setFollowing] = useState([]);
   const [post, setPost] = useState([]);
+  const navigate = useNavigate();
   // console.log(users);
   // console.log("^users^");
   console.log(currentUser);
   console.log("^currentUser^");
   console.log(following);
   console.log("^followers^");
-
-  const navigate = useNavigate();
-
 
 
   function logOut() {
