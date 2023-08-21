@@ -21,9 +21,9 @@ function App() {
           <Route path='/' element={<Navigate to='/login'></Navigate>}></Route>
           <Route path="/home" element={<Home setCurrentUser={setCurrentUser} currentUser={currentUser} />
           } />
-          <Route path="/viewPost" element={<Home setCurrentUser={setCurrentUser} currentUser={currentUser} />
+          <Route path="/viewPost" element={<ViewPost setCurrentUser={setCurrentUser} currentUser={currentUser} />
           } />
-          <Route path="/editUser" element={<Home setCurrentUser={setCurrentUser} currentUser={currentUser} />
+          <Route path="/editUser" element={<EditUser setCurrentUser={setCurrentUser} currentUser={currentUser} />
           } />
         </Routes>
       </BrowserRouter>
