@@ -6,7 +6,7 @@ const Community = require('../models/CommunityPost.model')
         //req.body is the form data
         .then(newComPost =>{console.log( "Back End Community Post has been created", req.body); res.status(200).json(newComPost)})
         // if we don't have status(400) when the client req it assume that everything is ok
-        .catch(err => {console.log("Something went wrong Back End Create Community Post", err), res.status(400).json(err)})
+        .catch(err => {console.log("Something went wrong Back End Create Community Post", err), res.status(500).json(err)})
   },
   getOneCoPost :(req,res)=>{
         Community.findById({_id:req.params.id})

@@ -14,21 +14,21 @@ const Home = () => {
         status: ''
     })
 
-    function deleteUser() {
-        axios.delete('http://localhost:5000/api/users/1')
-            .then(res => {
-                setUser({
-                    name: res.data.name,
-                    email: res.data.email,
-                    id: res.data.id,
-                    role: res.data.role,
-                    status: res.data.status
-                })
-            }
-            )
-            .catch(err => {
-                console.log(err)
-            })
+    // function deleteUser() {
+    //     axios.delete('http://localhost:5000/api/users/1')
+    //         .then(res => {
+    //             setUser({
+    //                 name: res.data.name,
+    //                 email: res.data.email,
+    //                 id: res.data.id,
+    //                 role: res.data.role,
+    //                 status: res.data.status
+    //             })
+    //         }
+    //         )
+    //         .catch(err => {
+    //             console.log(err)
+    //         })
   const[currentUser, setCurrentUser] = useState({});
   const [users, setUsers] = useState([]);
   const [following, setFollowing] = useState([]);
@@ -131,7 +131,7 @@ const Home = () => {
         <img src={logo} alt='Logo' id='logo2' />
         <div className='navLinks'>
 
-          <a href=""><button className='addP'>Add a Post</button></a>
+          <a href="/create"><button className='addP'>Add a Post</button></a>
           <a href=""><button className='allP'>All Posts</button></a>
           <a href="/viewPost"><button className='myP'>My Post</button></a>
 
@@ -182,5 +182,6 @@ const Home = () => {
     </div>
   );
 };
+
 
 export default Home;
