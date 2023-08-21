@@ -3,14 +3,13 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import logo from '../img/logo2-4.jpg';
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
 
 
 const Home = ({currentUser, setCurrentUser}) => {
   const [users, setUsers] = useState([]);
-  const [currentUser, setCurrentUser] = useState({});
   const [following, setFollowing] = useState([]);
   const [post, setPost] = useState([]);
+  const navigate = useNavigate();
   // console.log(users);
   // console.log("^users^");
   console.log(currentUser);
