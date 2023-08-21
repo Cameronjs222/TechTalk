@@ -31,33 +31,18 @@ module.exports = {
                 }, process.env.SECRET_KEY, { expiresIn: "1d" });
                 
                 res.cookie("userToken", userToken, { httpOnly: true })
-                .json({ msg: "success!", user: newUser });
+                .json({ msg: "success!", user: {id: newUser._id, name: newUser.name, email: newUser.email, jwt: userToken } });
             }
 
         } catch (error) {
             console.log(error);
             return res.status(500).json(error);
         }
-
-        // await User.create(req.body)
-        //     .then(user => {
-        //         const userToken = jwt.sign({
-        //             id: user._id
-        //         }, process.env.SECRET_KEY);
-
-        //         res
-        //             .cookie("usertoken", userToken, {
-        //                 httpOnly: true
-        //             })
-        //             .json({ msg: "success!", user: user });
-        //     })
-        //     .catch(err => res.status(400).json(err));
     },
 
     login: async (req, res) => {
         try {
             const user = await User.findOne({ email: req.body.email });
-            console.log(req.body.email);
             if(user){
                 const passwordMatch = await bcrypt.compare(req.body.password, user.password);
                 if(passwordMatch){
@@ -69,10 +54,10 @@ module.exports = {
                     res.cookie("userToken", userToken, { httpOnly: true })
                     .json({ msg: "success!", user: {id: user._id, name: user.name, email: user.email, jwt: userToken } });
                 } else {
-                    res.status(400).json({ msg: "Invalid Login Attempt(password)" });
+                    res.status(400).json({ msg: "Invalid Login Attempt" });
                 }
             } else {
-                res.status(400).json({ msg: "Invalid Login Attempt(any)" });
+                res.status(400).json({ msg: "Invalid Login Attempt" });
             }
         } catch (error) {
             console.log(error);
@@ -89,7 +74,6 @@ module.exports = {
 
     findOneSingleUser: async (req, res) => {
         const token = req.cookies.userToken;
-        console.log(token);
         if(!token){
             return res.status(501).json({ msg: "No Token Found" });
         }

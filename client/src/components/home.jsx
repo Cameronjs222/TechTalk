@@ -3,12 +3,12 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import logo from '../img/logo2-4.jpg';
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
 
 
-const Home = ({currentUser, setCurrentUser}) => {
+
+const Home = () => {
+  const[currentUser, setCurrentUser] = useState({});
   const [users, setUsers] = useState([]);
-  const [currentUser, setCurrentUser] = useState({});
   const [following, setFollowing] = useState([]);
   const [post, setPost] = useState([]);
   // console.log(users);
@@ -17,11 +17,16 @@ const Home = ({currentUser, setCurrentUser}) => {
   console.log("^currentUser^");
   console.log(following);
   console.log("^followers^");
-  
+
+  const navigate = useNavigate();
+
+
+
   function logOut() {
-    axios.post('http://localhost:8000/api/users/logout', { withCredentials: true })
+    axios.post('http://localhost:8000/api/users/logout',{}, { withCredentials: true })
       .then(res => {
         console.log(res)
+        setCurrentUser()
         navigate("/")
       })
       .catch(err => {
@@ -30,11 +35,22 @@ const Home = ({currentUser, setCurrentUser}) => {
   }
 
   useEffect(() => {
+    axios.get('http://localhost:8000/api/users/me',  { withCredentials: true })
+      .then(res => {
+        console.log(res)
+        setCurrentUser(res.data.user);
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, []);
+
+
+  useEffect(() => {
     const getUsers = async () => {
-      axios.get('http://localhost:8000/api/users')
+      axios.get('http://localhost:8000/api/users', { withCredentials: true })
         .then(res => {
           setUsers(res.data.users);
-          setCurrentUser(res.data.users[4]);
         })
         .catch(err => {
           console.log(err);
@@ -101,14 +117,14 @@ const Home = ({currentUser, setCurrentUser}) => {
 
           <a href=""><button className='addP'>Add a Post</button></a>
           <a href=""><button className='allP'>All Posts</button></a>
-          <a href=""><button className='myP'>My Post</button></a>
+          <a href="/viewPost"><button className='myP'>My Post</button></a>
 
         </div>
         <div className='userLink'>
 
           <p>Welcome {currentUser.name} </p>
           <a href="/updateuser?">Update Account Info</a> | <button onClick={logOut}>Logout</button>
-          
+
 
         </div>
       </div>
