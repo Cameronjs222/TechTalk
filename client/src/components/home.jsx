@@ -19,9 +19,6 @@ const Home = () => {
   console.log(following);
   console.log("^followers^");
 
-  const navigate = useNavigate();
-
-
 
   function logOut() {
     axios.post('http://localhost:8000/api/users/logout',{}, { withCredentials: true })
