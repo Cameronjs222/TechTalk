@@ -1,21 +1,41 @@
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import logo from '../img/logo2-4.jpg';
 import { useNavigate } from 'react-router-dom';
 
-
-
 const Home = () => {
+  const [user, setUser] = useState({
+        name: '',
+        email: '',
+        id: '',
+        role: '',
+        status: ''
+    })
+
+    // function deleteUser() {
+    //     axios.delete('http://localhost:5000/api/users/1')
+    //         .then(res => {
+    //             setUser({
+    //                 name: res.data.name,
+    //                 email: res.data.email,
+    //                 id: res.data.id,
+    //                 role: res.data.role,
+    //                 status: res.data.status
+    //             })
+    //         }
+    //         )
+    //         .catch(err => {
+    //             console.log(err)
+    //         })
   const[currentUser, setCurrentUser] = useState({});
   const [users, setUsers] = useState([]);
   const [following, setFollowing] = useState([]);
   const [post, setPost] = useState([]);
   const navigate = useNavigate();
-  // console.log(users);
-  // console.log("^users^");
-  console.log(currentUser);
-  console.log("^currentUser^");
+ 
+ 
   console.log(following);
   console.log("^followers^");
 
@@ -23,7 +43,6 @@ const Home = () => {
   function logOut() {
     axios.post('http://localhost:8000/api/users/logout',{}, { withCredentials: true })
       .then(res => {
-        console.log(res)
         setCurrentUser()
         navigate("/")
       })
@@ -35,7 +54,6 @@ const Home = () => {
   useEffect(() => {
     axios.get('http://localhost:8000/api/users/me',  { withCredentials: true })
       .then(res => {
-        console.log(res)
         setCurrentUser(res.data.user);
       })
       .catch(err => {
@@ -113,7 +131,7 @@ const Home = () => {
         <img src={logo} alt='Logo' id='logo2' />
         <div className='navLinks'>
 
-          <a href=""><button className='addP'>Add a Post</button></a>
+          <a href="/create"><button className='addP'>Add a Post</button></a>
           <a href=""><button className='allP'>All Posts</button></a>
           <a href="/viewPost"><button className='myP'>My Post</button></a>
 
@@ -121,7 +139,7 @@ const Home = () => {
         <div className='userLink'>
 
           <p>Welcome {currentUser.name} </p>
-          <a href="/updateuser?">Update Account Info</a> | <button onClick={logOut}>Logout</button>
+          <a href="/editUser">Update Account Info</a> | <button onClick={logOut}>Logout</button>
 
 
         </div>
@@ -164,5 +182,6 @@ const Home = () => {
     </div>
   );
 };
+
 
 export default Home;

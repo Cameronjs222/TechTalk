@@ -17,6 +17,7 @@ app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 
 // const userToken = jwt.sign(payload, process.env.SECRET_KEY);
 
+
 const AllMyUserRoutes = require('./routes/users.routes');
 const AllMyPostRoutes = require('./routes/post.routes');
 const AllMyCommentRoutes = require('./routes/comment.routes')
