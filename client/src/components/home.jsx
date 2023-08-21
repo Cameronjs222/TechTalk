@@ -1,12 +1,34 @@
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import logo from '../img/logo2-4.jpg';
 import { useNavigate } from 'react-router-dom';
 
-
-
 const Home = () => {
+  const [user, setUser] = useState({
+        name: '',
+        email: '',
+        id: '',
+        role: '',
+        status: ''
+    })
+
+    function deleteUser() {
+        axios.delete('http://localhost:5000/api/users/1')
+            .then(res => {
+                setUser({
+                    name: res.data.name,
+                    email: res.data.email,
+                    id: res.data.id,
+                    role: res.data.role,
+                    status: res.data.status
+                })
+            }
+            )
+            .catch(err => {
+                console.log(err)
+            })
   const[currentUser, setCurrentUser] = useState({});
   const [users, setUsers] = useState([]);
   const [following, setFollowing] = useState([]);
