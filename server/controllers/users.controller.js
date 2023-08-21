@@ -6,8 +6,6 @@ module.exports.findAllUsers = (req, res) => {
     .then((allUsers) => res.json({users: allUsers}))
     .catch(err => res.json({message: "Something went wrong", error: err}));
 }
-
-
 module.exports.createNewUser = (req, res) => {
     User.create(req.body)
     .then(newlyCreatedUser => res.json({user: newlyCreatedUser}))

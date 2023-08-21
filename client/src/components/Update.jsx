@@ -6,12 +6,12 @@ const Update = () => {
     const { id } = useParams();
     const [errors, setErrors] = useState({})
     const [updatePost, setUpdatePost] = useState({
-        title: '',
+        title: "",
         post: "",
 
     })
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/update/${id}`)
+        axios.get(`http://localhost:8000/api/one/${id}`)
             .then((res) => {
                 console.log("FRONT END GET ONE RES", res);
                 console.log("FRONT END GET ONE RES DATA", res.data)
@@ -35,7 +35,6 @@ const Update = () => {
     const changeHandler = (e) => {
 
         setUpdatePost({ ...updatePost, [e.target.name]: e.target.value })
-
     }
     return (
         <div class='row'>
@@ -50,7 +49,7 @@ const Update = () => {
                         <div className="form-group ">
                             <p>
                                 {
-                                    errors.title ? <p> {errors.title.message} </p> : null
+                                    errors.title ? <p> {errors.name.message} </p> : null
                                 }
 
                                 <label> Title:</label>
@@ -62,18 +61,12 @@ const Update = () => {
                                 {
                                     errors.post && <p> {errors.post.message}  </p>
                                 }
-                                <label> Pet Type :</label>
+                                <label> Post :</label>
                                 <input type="text" name="post" placeholder=' Enter pet type' className="form-control  "
                                     onChange={changeHandler}
                                     value={updatePost.post}
                                 />
                             </p>
-
-
-
-
-
-
                             <button className="btn btn-primary mt-3" type="submit" >Edit Post</button>
 
                         </div>

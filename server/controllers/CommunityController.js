@@ -8,6 +8,12 @@ const Community = require('../models/CommunityPost.model')
         // if we don't have status(400) when the client req it assume that everything is ok
         .catch(err => {console.log("Something went wrong Back End Create Community Post", err), res.status(400).json(err)})
   },
+  getOneCoPost :(req,res)=>{
+        Community.findById({_id:req.params.id})
+        .then(oneComPost => {console.log(oneComPost);
+            res.status(200).json(oneComPost)})
+        .catch(err => res.status(400).json(err))
+    },
     updateComPost :(req,res)=>{
     console.log("BACK END UPDATED", req.params.id)
 

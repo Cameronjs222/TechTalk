@@ -2,7 +2,6 @@ import './App.css';
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 import Update from './components/Update';
 import CreatePost from './components/CreatePost';
-import { UpdatePost } from './components/UpdatePost';
 
 function App() {
   return (
@@ -16,9 +15,6 @@ function App() {
         <Route path = '/' element = {"Compenent titles for each page"}></Route>
         <Route path="/create" element={<CreatePost/>}/>
         <Route path="/update/:id" element={<Update/>}/>
-
-
-
       </Routes>
       </BrowserRouter>
     </div>
