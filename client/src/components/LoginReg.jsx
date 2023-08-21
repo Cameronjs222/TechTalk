@@ -61,6 +61,7 @@ const LoginReg = ({currentUser, setCurrentUser}) => {
         axios.post('http://localhost:8000/api/users/register', userReg, { withCredentials: true })
             .then(res => {
                 console.log("response^^^", res);
+                setCurrentUser(res.data.user);
                 navigate("/home")
             })
             .catch(err => {
