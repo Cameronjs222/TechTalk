@@ -13,7 +13,7 @@ module.exports = (app) => {
 
     // app.get('/api/users/:email', UsersController.findUserByEmail);
 
-    app.patch('/api/users/:id', UsersController.updateExistingUser);
+    app.patch('/api/users/updateMe', UsersController.updateExistingUser);
 
     app.delete('/api/users/:id', UsersController.deleteAnExistingUser);
 

@@ -34,10 +34,8 @@ const Home = () => {
   const [following, setFollowing] = useState([]);
   const [post, setPost] = useState([]);
   const navigate = useNavigate();
-  // console.log(users);
-  // console.log("^users^");
-  console.log(currentUser);
-  console.log("^currentUser^");
+ 
+ 
   console.log(following);
   console.log("^followers^");
 
@@ -45,7 +43,6 @@ const Home = () => {
   function logOut() {
     axios.post('http://localhost:8000/api/users/logout',{}, { withCredentials: true })
       .then(res => {
-        console.log(res)
         setCurrentUser()
         navigate("/")
       })
@@ -57,7 +54,6 @@ const Home = () => {
   useEffect(() => {
     axios.get('http://localhost:8000/api/users/me',  { withCredentials: true })
       .then(res => {
-        console.log(res)
         setCurrentUser(res.data.user);
       })
       .catch(err => {
@@ -143,7 +139,7 @@ const Home = () => {
         <div className='userLink'>
 
           <p>Welcome {currentUser.name} </p>
-          <a href="/updateuser?">Update Account Info</a> | <button onClick={logOut}>Logout</button>
+          <a href="/editUser">Update Account Info</a> | <button onClick={logOut}>Logout</button>
 
 
         </div>
