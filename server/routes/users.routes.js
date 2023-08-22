@@ -19,6 +19,8 @@ module.exports = (app) => {
 
     app.get('/api/users/:id', UsersController.findOneSingleUserById);
 
+    app.patch('/api/users/:id', UsersController.updateExistingUserById);
+
 };
 
 //this is a git push test comment
