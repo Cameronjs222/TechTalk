@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import axios from "axios"
 import { useNavigate } from 'react-router-dom';
 
+import logo from '../img/logo2-4.jpg';
+
+
 const CreatePost = () => {
 
     const navigate = useNavigate();
@@ -17,6 +20,18 @@ const CreatePost = () => {
                 console.log(err)
             })
     }, []);
+
+
+    function logOut() {
+        axios.post('http://localhost:8000/api/users/logout',{}, { withCredentials: true })
+          .then(res => {
+            setCurrentUser()
+            navigate("/")
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      }
 
 
 
@@ -53,37 +68,51 @@ const CreatePost = () => {
             })
     }
     return (
-        <div className='row'>
-            <div className='row justify-content-center'>
-                <div className="row">
-                    <form className="col-md-4 offset-1" onSubmit={submitHandler} >
-                        <div className='d-flex p-2 justify-content-between'>
-                        </div>
-                        <h4>What would you like to post {currentUser.name}?</h4>
-                        <div className="form-group ">
-                            <div className='d-flex p-10'>
-                            {errors && errors.map((item, idx) => (
-                            <p key={idx} style={{ color: 'red' }}>**{item}</p>
-                        ))} 
-                                <label> Title:</label>
-                                <input type="text" name="title" placeholder=' Type here......' className="form-control" value={comPostInfo.title}
-                                    onChange={changeHandler}
-                                />
-                                <label> Post :</label>
-                                <textarea name="content" rows="4" cols="50" placeholder='Type here......' className="form-control" value={comPostInfo.content}
-                                    onChange={changeHandler}
-                                />
 
-
-                                <button className="btn btn-primary mt-3" type="submit" >Submit</button>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
+    <div className='mainAddPost'>
+        <div className='navBar'>
+            <img src={logo} alt='Logo' id='logo2' />
+            <div className='navLinks'>
+                <a href="/home"><button className='allP'>All Posts</button></a>
+                <a href=""><button className='myP'>My Post</button></a>
             </div>
-        </div >
-    )
+
+            <div className='userLink'>
+                <p>Welcome <b>"{currentUser.name}Mark Jacobs"</b></p>
+                <a href="/editUser"><button className='accInfo'>User Info</button></a>  <button onClick={logOut} className='logbutton'>Logout</button>
+            </div>
+      </div>
+            
+                    <div className="addPostDiv">
+
+                            <h1>Add a Post {currentUser.name}?</h1>
+                            <p className='sign24'><i>"Post once every 24 hours"</i></p>
+
+                        <form onSubmit={submitHandler} >
+                            <div>
+                                <div>
+                                {errors && errors.map((item, idx) => (
+                                <p key={idx} style={{ color: 'red' }}>**{item}</p>
+                                ))} 
+                                    <div  id='topTitle'>
+                                        <input type="text" id='inputTitle' name="title" placeholder='Add Title Here' className="form-control" value={comPostInfo.title} onChange={changeHandler} />
+                                    </div>
+
+                                    <div>
+                                        <textarea name="content" id='addPpost' placeholder='Add Post Here' rows="50" cols="50" className="form-control" value={comPostInfo.content} onChange={changeHandler} />
+                                    </div>
+
+
+                                    <button className="btn btn-dark" type="submit" >Submit</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+    </div>
+          
+
+ )
 }
 
 export default CreatePost

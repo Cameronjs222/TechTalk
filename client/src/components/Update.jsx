@@ -37,11 +37,12 @@ const Update = () => {
         setUpdatePost({ ...updatePost, [e.target.name]: e.target.value })
     }
     return (
-        <div class='row'>
-            <div className='row justify-content-center'>
+
+        <div class='mainUppPost'>
+            
 
                 <div className="row">
-                    <form className="col-md-4 offset-1" onSubmit={submitHandler} >
+                    <form  onSubmit={submitHandler} >
                         <div className='d-flex p-2 justify-content-between'>
                             <h2>Update Post</h2>
                         </div>
@@ -74,7 +75,8 @@ const Update = () => {
                     </form>
                 </div>
             </div >
-        </div >
+
+
     )
 }
 export default Update

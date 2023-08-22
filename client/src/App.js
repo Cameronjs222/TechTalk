@@ -17,7 +17,6 @@ function App() {
         <Routes>
           <Route path='/login' element={<LoginReg setCurrentUser={setCurrentUser} currentUser={currentUser} />} ></Route>
           <Route path='/' element={<Navigate to='/login'></Navigate>}></Route>
-
           <Route path="/home" element={<Home setCurrentUser={setCurrentUser} currentUser={currentUser} />
           } />
           <Route path="/viewPost" element={<ViewPost setCurrentUser={setCurrentUser} currentUser={currentUser} />
