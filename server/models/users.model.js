@@ -1,45 +1,39 @@
 const mongoose = require('mongoose');
-
-const bcrypt = require('bcrypt');
-
-
+const bcrypt = require("bcrypt")
 const userSchema = new mongoose.Schema({
 
-    email: {
-        type: String,
+    email:{
+        type:String,
         required: [true, "Email is required"],
-        unique: [true, "Email already exists"],
-        validate: {
-            validator: function (value) {
-                return /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(value);
-            },
-            message: "Please enter a valid email"
-        }
+        unique:true
     },
-    password: {
-        type: String,
+    password:{
+        type:String,
         required: [true, "Password is required"],
-        minlength: [8, "Password must be at least 8 characters long"]
     },
-    name: {
-        type: String,
+    confirmPass:{
+        type:String,
+        required: [true, "Confirm Password is required"],
+    },
+    name:{
+        type:String,
         required: [true, "Full Name is required"],
         minlength: [2, "Full Name must at least be 2 characters long"]
     },
-    followers: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+    followers:[{
+        type: mongoose.Schema.Types.ObjectId, 
+        ref:'User'
     }],
-    following: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+    following:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
     }],
-    posts: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Post'
+    posts:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Post'
     }],
-}, {
-    timestamps: true
+},{
+    timestamps:true
 });
 
 userSchema.virtual('confirmPass')
@@ -62,4 +56,4 @@ userSchema.virtual('confirmPass')
     });
     
     module.exports = mongoose.model('User', userSchema);
-
+   
