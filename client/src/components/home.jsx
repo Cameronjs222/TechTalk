@@ -164,7 +164,7 @@ const Home = () => {
 
           <div className='comPost'><h2>Community Post</h2></div>
           <div>
-            {post.map(post => (
+          {post.slice().reverse().map(post => (
               <Link className='postLink' to={`/User/${post.user}`} key={post._id}>
                 <div key={post._id} className='singlePost' style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
                   <span>Today's post by {post.user_name}: {post.title}</span>
