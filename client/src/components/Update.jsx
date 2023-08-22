@@ -37,6 +37,7 @@ const Update = () => {
         setUpdatePost({ ...updatePost, [e.target.name]: e.target.value })
     }
     return (
+
         <div class='mainUppPost'>
             
 
@@ -74,7 +75,8 @@ const Update = () => {
                     </form>
                 </div>
             </div >
-        
+
+
     )
 }
 export default Update

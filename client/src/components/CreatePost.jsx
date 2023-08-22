@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios"
 import { useNavigate } from 'react-router-dom';
+
 import logo from '../img/logo2-4.jpg';
+
 
 const CreatePost = () => {
 
@@ -19,6 +21,7 @@ const CreatePost = () => {
             })
     }, []);
 
+
     function logOut() {
         axios.post('http://localhost:8000/api/users/logout',{}, { withCredentials: true })
           .then(res => {
@@ -29,6 +32,7 @@ const CreatePost = () => {
             console.log(err)
           })
       }
+
 
 
 
@@ -64,6 +68,7 @@ const CreatePost = () => {
             })
     }
     return (
+
     <div className='mainAddPost'>
         <div className='navBar'>
             <img src={logo} alt='Logo' id='logo2' />
@@ -105,7 +110,8 @@ const CreatePost = () => {
                     </div>
     </div>
           
-    )
+
+ )
 }
 
 export default CreatePost

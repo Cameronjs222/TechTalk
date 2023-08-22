@@ -61,6 +61,7 @@ const EditUser = (props) => {
                     setErrors(["An error occurred while processing your request."]);
                 }
             })
+
     }
 
     function logOut() {
@@ -73,9 +74,11 @@ const EditUser = (props) => {
             .catch(err => {
                 console.log(err)
             })
+
     }
 
     return (
+
 
     <div className='mainFormUp'>
         <div className='navBar'>
@@ -125,6 +128,7 @@ const EditUser = (props) => {
                 </form>
         </div>
     </div>
+
 
     )
 }
