@@ -14,14 +14,16 @@ const User = () => {
     const [user, setUser] = useState({})
     const navigate = useNavigate();
 
-    console.log(user.posts);
+    console.log(user);
     console.log("^user^");
-    console.log(post);
-    console.log("^post^");
+    console.log(currentUser);
+    console.log("^currentUser^");
+    // console.log(post);
+    // console.log("^post^");
 
 
 
-    function logOut() { 
+    function logOut() {
         axios.post('http://localhost:8000/api/users/logout', {}, { withCredentials: true })
             .then(res => {
                 console.log(res)
@@ -37,45 +39,95 @@ const User = () => {
         axios.get('http://localhost:8000/api/users/me', { withCredentials: true })
             .then(res => {
                 console.log(res)
-                setCurrentUser(res.data);
+                setCurrentUser(res.data.user);
             })
             .catch(err => {
                 console.log(err)
             })
-    
+
         axios.get(`http://localhost:8000/api/users/${userId}`)
             .then(res => {
                 setUser(res.data.user);
-    
-                const fetchedPosts = [];
-                const post = res.data.user.posts;
-                console.log(post);
-                console.log('this is post');
-                try {
-                    post.map(postId => {
-                        axios.get(`http://localhost:8000/api/post/${postId}`)
-                            .then(res => {
-                                console.log(res.data.post);
-                                console.log('post');
-                                fetchedPosts.push(res.data.post);
-                                setPost(fetchedPosts);
-                            })
-                            .catch(err => {
-                                console.log(err)
-                                console.log('error')
-                            })
+
+                const fetchedPosts = []; // Create an array to hold fetched posts
+
+                // Use Promise.all to fetch all posts concurrently
+                const fetchPostPromises = res.data.user.posts.map(postId =>
+                    axios.get(`http://localhost:8000/api/post/${postId}`)
+                        .then(res => {
+                            console.log(res.data.post);
+                            fetchedPosts.push(res.data.post);
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        })
+                );
+
+                // Wait for all fetches to complete before updating state
+                Promise.all(fetchPostPromises)
+                    .then(() => {
+                        setPost(fetchedPosts);
+                    })
+                    .catch(err => {
+                        console.log(err);
                     });
-                } catch (err) {
-                    console.log(err)
-                    console.log('error')
-                }
             })
             .catch(err => {
-                console.log(err)
-                console.log('error')
+                console.log(err);
             });
-    
+
     }, []);
+
+    function followUser() {
+
+        if(currentUser.following.includes(user._id)) return;
+
+        axios.patch(`http://localhost:8000/api/users/${currentUser._id}`, {
+            following: [...currentUser.following, user._id]
+        }, { withCredentials: true })
+            .then(res => {
+                console.log(res);
+                navigate(`/user/${userId}`);
+                setCurrentUser({ ...currentUser, following: [...currentUser.following, user._id] });
+                axios.patch(`http://localhost:8000/api/users/${userId}`, {
+                    followers: [...user.followers, currentUser._id]
+                }, { withCredentials: true })
+                    .then(res => {
+                        console.log(res);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    }
+                    )
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    function unfollowUser() {
+        axios.patch(`http://localhost:8000/api/users/${currentUser._id}`, {
+            following: currentUser.following.filter(followedId => followedId !== user._id)
+        }, { withCredentials: true })
+            .then(res => {
+                console.log(res);
+                navigate(`/user/${userId}`);
+                setCurrentUser({ ...currentUser, following: currentUser.following.filter(followedId => followedId !== user._id) });
+                axios.patch(`http://localhost:8000/api/users/${userId}`, {
+                    followers: user.followers.filter(followerId => followerId !== currentUser._id)
+                }, { withCredentials: true })
+                    .then(res => {
+                        console.log(res);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    }
+                    )
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 
 
     return (
@@ -98,11 +150,30 @@ const User = () => {
                 </div>
             </div>
 
-            <div className='homeMain'>        
+            <div className='homeMain'>
 
                 <div className='allPost'>
+                    <div className="comPost">
 
-                    <div className='comPost'><h2>Community Post</h2></div>
+                    {user._id === currentUser._id
+                        ? (<div className='comPost'><h2>My Post</h2></div>)
+                        : (<div className='comPost'><h2>{user.name}'s Post</h2></div>)
+                    }
+{user._id !== currentUser._id
+    ? (
+        <div className=''>
+            {currentUser.following.includes(user._id)
+                ? <button onClick={() => unfollowUser()} id='unfollowButton' className='addP'>unfollow</button>
+                : <button onClick={() => followUser()} id='followButton' className='addP'>follow</button>
+            }
+        </div>
+    )
+    : (
+        <div className='' style={{ display: 'none' }}>
+        </div>
+    )
+}
+                    </div>
                     <div>
                         {post.map(post => (
                             <Link className='postLink' to={`/viewPost/${post._id}`} key={post._id}>
