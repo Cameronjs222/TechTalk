@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const bcrypt = require('bcrypt');
 
 
@@ -41,8 +42,6 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 });
 
-
-
 userSchema.virtual('confirmPass')
     .get(() => this._confirmPass)
     .set(value => this._confirmPass = value);
@@ -63,5 +62,4 @@ userSchema.virtual('confirmPass')
     });
     
     module.exports = mongoose.model('User', userSchema);
-    
-    
+

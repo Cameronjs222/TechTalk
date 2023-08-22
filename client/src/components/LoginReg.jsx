@@ -34,8 +34,8 @@ const LoginReg = ({currentUser, setCurrentUser}) => {
             })
             .catch(err => {
                 console.log(err)
-                const error = err.response.data.msg;
-                setErrors({ error })
+                const errors = err.response.data.msg;
+                setErrors({ errors })
             })
     }
 
@@ -95,7 +95,7 @@ const LoginReg = ({currentUser, setCurrentUser}) => {
                     <img src={logo} alt='Logo' id='logo1' /> <br />
 
                     <form className='logForm' onSubmit={loginSubmit}>
-                        {errors.error && <p className="error">{errors.error}</p>}
+                        {errors.errors && <p className="error">{errors.errors}</p>}
                         <div className="form-floating mb-3">
                             <input type="email" className="form-control" id="floatingInput" name="email" placeholder="name@example.com" value={userLogin.email} onChange={onChangeHandler} />
                             <label htmlFor="email">Email address</label>
