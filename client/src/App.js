@@ -6,6 +6,7 @@ import ViewPost from "./components/viewPost"
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LoginReg from './components/LoginReg';
 import EditUser from './components/EditUser';
+import User from './components/viewUser';
 import { useEffect, useState } from 'react';
 function App() {
 
@@ -20,6 +21,8 @@ function App() {
           <Route path="/home" element={<Home setCurrentUser={setCurrentUser} currentUser={currentUser} />
           } />
           <Route path="/viewPost" element={<ViewPost setCurrentUser={setCurrentUser} currentUser={currentUser} />
+          } />
+         <Route path="/User/:userId" element={<User setCurrentUser={setCurrentUser} currentUser={currentUser} />
           } />
           <Route path="/editUser" element={<EditUser setCurrentUser={setCurrentUser} currentUser={currentUser} />
           } /> 
