@@ -75,6 +75,7 @@ const ViewPost = () => {
             <div className='navBar'>
                 <img src={logo} alt='Logo' id='logo2' />
                 <div className='navLinks'>
+
                     <a href="/create"><button className='addP'>Add a Post</button></a>
                     <a href="/home"><button className='allP'>All Posts</button></a>
                     <a href=""><button className='myP'>My Post</button></a>
@@ -82,6 +83,7 @@ const ViewPost = () => {
                 <div className='userLink'>
                     <p>Welcome <b>"{currentUser.name}Mark Jacobs"</b></p>
                     <a href="/editUser"><button className='accInfo'>User Info</button></a>  <button onClick={logOut} className='logbutton'>Logout</button>
+
                 </div>
             </div>
 

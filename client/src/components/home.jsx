@@ -130,6 +130,7 @@ const Home = () => {
       <div className='navBar'>
         <img src={logo} alt='Logo' id='logo2' />
         <div className='navLinks'>
+
           <a href="/create"><button className='addP'>Add a Post</button></a>
           <a href="/viewPost"><button className='myP'>My Post</button></a>
         </div>
@@ -180,3 +181,4 @@ const Home = () => {
 
 
 export default Home;
+
