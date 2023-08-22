@@ -1,8 +1,12 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+
 
 const UpdatePost = ({ setOnePost }) => {
+
+    const navigate = useNavigate()
 
     const { id } = useParams();
     const [errors, setErrors] = useState({})
@@ -16,7 +20,7 @@ const UpdatePost = ({ setOnePost }) => {
             .then((res) => {
                 console.log("FRONT END GET ONE RES", res);
                 console.log("FRONT END GET ONE RES DATA", res.data)
-                setUpdatePost(res.data)
+                setUpdatePost(res.data.post)
             })
             .catch(err => console.log('Something went wrong FRONT END GET ALL', err))
     }, [id])
@@ -27,6 +31,7 @@ const UpdatePost = ({ setOnePost }) => {
                 console.log('FRONT END UPDATE RES', res);
                 console.log('FRONT END UPDATE RES DATA', res.data)
                 setOnePost(res.data)
+                navigate("/home")
 
             })
             .catch((err) => {
@@ -40,21 +45,21 @@ const UpdatePost = ({ setOnePost }) => {
     }
     return (
         <div class='row'>
+            <style>{'body { background-color:#D2B48C;}'}</style>
+
             <div className='row justify-content-center'>
 
 
                 <div className="row">
                     <form className="col-md-4 offset-1" onSubmit={submitHandler} >
                         <div className='d-flex p-2 justify-content-between'>
-                            <h2>Update Post</h2>
+                            <h2 style={{ color: 'red' }}>Update Post</h2>
                         </div>
                         <div className="form-group ">
                             <p>
                                 {
                                     errors.title ? <p> {errors.title.message} </p> : null
                                 }
-
-
 
                                 <label> Title:</label>
                                 <input name="title" placeholder='Type here.......... ' className="form-control  "
@@ -63,26 +68,28 @@ const UpdatePost = ({ setOnePost }) => {
                             </p>
                             <p>
                                 {
-                                    errors.user_name && <p> {errors.user_name.message}  </p>
+                                    updatePost.user_name ? <div><label> User Name :</label>
+                                        <input name="user_name" placeholder='Type.......' className="form-control  "
+                                            onChange={changeHandler}
+                                            value={updatePost.user_name}
+
+                                        /> </div> : "no user name"
+
                                 }
-                                <label> User Name :</label>
-                                <input name="user_name" placeholder='Type.......' className="form-control  "
-                                    onChange={changeHandler}
-                                    value={updatePost.user_name}
-                                />
+
                             </p>
-                            <div>
-                                <p>
-                                    {
-                                        errors.content && <p> {errors.content?.message}  </p>
-                                    }
-                                    <label> Content :</label>
-                                    <textarea name="content" rows="4" cols="50" placeholder='Type here......' className="form-control"
-                                        onChange={changeHandler} value={updatePost.content}
-                                    ></textarea>
-                                </p>
-                            </div>
-                            <button className="btn btn-primary mt-3" type="submit" >Edit Post</button>
+                            <div></div>
+                            <p>
+                                {
+                                    errors.content && <p> {errors.content?.message}  </p>
+                                }
+                                <label> Content :</label>
+                                <textarea name="content" rows="4" cols="50" placeholder='Type here......' className="form-control"
+                                    onChange={changeHandler} value={updatePost.content}
+                                ></textarea>
+                            </p>
+                            <div />
+                            <button className="btn btn-success mt-3" type="submit" >Edit Post</button>
 
                         </div>
 

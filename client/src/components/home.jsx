@@ -3,9 +3,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import logo from '../img/logo2-4.jpg';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+
+
 
 const Home = () => {
+  const { id } = useParams();
+
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -132,6 +136,7 @@ const Home = () => {
         <img src={logo} alt='Logo' id='logo2' />
         <div className='navLinks'>
 
+
           <a href="/create"><button className='addP'>Add a Post</button></a>
           <a href=""><button className='allP'>All Posts</button></a>
           <a href="/viewPost"><button className='myP'>My Post</button></a>
@@ -173,6 +178,8 @@ const Home = () => {
               <Link className='postLink' to={`/viewPost/${post._id}`} key={post._id}>
                 <div key={post._id} className='singlePost' style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
                   <span>Today's post by {post.user_name}: {post.title}</span>
+                  <Link to={`/edit/${post._id}`}><button className='addP'>Edit Post</button></Link>
+
                   <span>{post.content}</span>
                 </div>
               </Link>
