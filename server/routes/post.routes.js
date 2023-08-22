@@ -4,7 +4,7 @@ const PostController = require('../controllers/post.controller');
             
             app.get('/api/post', PostController.findAllPosts);
     
-            app.post('/api/post', PostController.createNewPost);
+            app.post('/api/post/create', PostController.createNewPost);
     
             app.get('/api/post/:id', PostController.findOneSinglePost);
     
