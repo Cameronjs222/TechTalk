@@ -42,6 +42,7 @@ const UpdatePost = ({ setOnePost }) => {
         <div class='row'>
             <div className='row justify-content-center'>
 
+
                 <div className="row">
                     <form className="col-md-4 offset-1" onSubmit={submitHandler} >
                         <div className='d-flex p-2 justify-content-between'>
@@ -52,6 +53,8 @@ const UpdatePost = ({ setOnePost }) => {
                                 {
                                     errors.title ? <p> {errors.title.message} </p> : null
                                 }
+
+
 
                                 <label> Title:</label>
                                 <input name="title" placeholder='Type here.......... ' className="form-control  "
