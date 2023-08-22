@@ -80,7 +80,8 @@ const CreatePost = () => {
             
                     <div className="addPostDiv">
 
-                            <h4>What would you like to post {currentUser.name}?</h4>
+                            <h1>Add a Post {currentUser.name}?</h1>
+                            <p className='sign24'><i>"Post once every 24 hours"</i></p>
 
                         <form onSubmit={submitHandler} >
                             <div>

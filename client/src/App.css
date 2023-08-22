@@ -183,7 +183,7 @@
 .addP:hover,
 .allP:hover,
 .myP:hover{
-  background-color: #590004;
+  background-color: #802226;
 }
 
 .viewCont{
@@ -194,13 +194,14 @@
 }
 
 .fpTitle{
-  background-color: #590004;
+  background-color: #802226;
   color: white;
   border-radius: 25px;
   width: 350px;
   position: absolute;
   z-index: 1;
   box-shadow: 5px 5px 5px gray;
+  font-family: 'Raleway', sans-serif;
 }
 
 .friendPost{
@@ -447,23 +448,29 @@ a{
   width: 500px;
 }
 
+.addPostDiv h1{
+  font-family: 'Rozha One', serif;
+  color:#c66358;
+}
+
 .addPostDiv{
   margin-top: 50px;
 }
 
-.addPostDiv h4{
+.sign24{
   margin-bottom: 50px;
 }
 
 #addPpost{
   height: 250px;
   width: 500px;
-  padding-top: 50px;
+  padding-top: 40px;
   position: relative;
   left: 30px;
   top: -20px;
   border-radius: 20px;
   box-shadow: 5px 5px 5px gray;
+  border: none;
 }
 
 #topTitle{
@@ -471,7 +478,7 @@ a{
 }
 
 #inputTitle{
-  background-color:#692123;
+  background-color:#802226;
   border-radius: 30px;
   padding: 20px;
   color: white;
