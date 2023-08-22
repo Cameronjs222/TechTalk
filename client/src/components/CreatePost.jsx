@@ -74,7 +74,7 @@ const CreatePost = () => {
             <img src={logo} alt='Logo' id='logo2' />
             <div className='navLinks'>
                 <a href="/home"><button className='allP'>All Posts</button></a>
-                <a href=""><button className='myP'>My Post</button></a>
+                <a href="/create"><button className='myP'>My Post</button></a>
             </div>
 
             <div className='userLink'>
