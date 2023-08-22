@@ -132,16 +132,12 @@ const Home = () => {
         <div className='navLinks'>
 
           <a href="/create"><button className='addP'>Add a Post</button></a>
-          <a href=""><button className='allP'>All Posts</button></a>
           <a href="/viewPost"><button className='myP'>My Post</button></a>
-
         </div>
+
         <div className='userLink'>
-
-          <p>Welcome {currentUser.name} </p>
-          <a href="/editUser">Update Account Info</a> | <button onClick={logOut}>Logout</button>
-
-
+          <p>Welcome <b>"{currentUser.name}Mark Jacobs"</b></p>
+          <a href="/editUser"><button className='accInfo'>User Info</button></a>  <button onClick={logOut} className='logbutton'>Logout</button>
         </div>
       </div>
 
@@ -185,3 +181,4 @@ const Home = () => {
 
 
 export default Home;
+

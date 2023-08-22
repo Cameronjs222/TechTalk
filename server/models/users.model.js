@@ -62,4 +62,4 @@ userSchema.virtual('confirmPass')
     });
     
     module.exports = mongoose.model('User', userSchema);
-   
+

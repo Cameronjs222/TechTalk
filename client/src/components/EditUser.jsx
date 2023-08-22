@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import logo from '../img/logo2-4.jpg';
 
 const EditUser = (props) => {
     const { id } = useParams();
@@ -60,41 +61,74 @@ const EditUser = (props) => {
                     setErrors(["An error occurred while processing your request."]);
                 }
             })
+
+    }
+
+    function logOut() {
+        axios.post('http://localhost:8000/api/users/logout', {}, { withCredentials: true })
+            .then(res => {
+                console.log(res)
+                setCurrentUser()
+                navigate("/")
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
     }
 
     return (
 
-        <div>
 
-            <form className='logForm' onSubmit={editUser}>
-            {errors.error && <p className="error">{errors.error}</p>}
-                        {errors && errors.map((item, idx) => (
-                            <p key={idx} style={{ color: 'red' }}>**{item}</p>
-                        ))}
+    <div className='mainFormUp'>
+        <div className='navBar'>
+                <img src={logo} alt='Logo' id='logo2' />
+                <div className='navLinks'>
 
-                <div className="form-floating mb-3">
-                    <input type="text" className="form-control" value={loggedUser.name} id="floatingInput" name='name' placeholder="name@example.com" onChange={onChangeHandler} />
-                    <label htmlFor='name'>Full Name</label>
+                    <a href=""><button className='addP'>Add a Post</button></a>
+                    <a href="/home"><button className='allP'>All Posts</button></a>
+                    <a href=""><button className='myP'>My Post</button></a>
+
                 </div>
-
-                <div className="form-floating mb-3">
-                    <input type="email" className="form-control" value={loggedUser.email} id="floatingInput" name='email' placeholder="name@example.com" onChange={onChangeHandler} />
-                    <label htmlFor="email">Email address</label>
+                <div className='userLink'>
+                    <p>Welcome <b>"{currentUser.name}Mark Jacobs"</b></p>
+                    <a href="/editUser"><button className='accInfo'>User Info</button></a>  <button onClick={logOut} className='logbutton'>Logout</button>
                 </div>
+            </div>
 
-                <div className="form-floating mb-3">
-                    <input type="password" className="form-control" value={loggedUser.password} id="floatingPassword" name='password' placeholder="Password" onChange={onChangeHandler} />
-                    <label htmlFor="password">Password</label>
-                </div>
+        <div className='formUp'>
+            <h1>UPDATE USER INFO</h1>
+                <form className='logForm' onSubmit={editUser}>
+                {errors.error && <p className="error">{errors.error}</p>}
+                            {errors && errors.map((item, idx) => (
+                                <p key={idx} style={{ color: 'red' }}>**{item}</p>
+                            ))}
 
-                <div className="form-floating">
-                    <input type="password" className="form-control" name='confirmPass' value={loggedUser.confirmPass} id="floatingPassword" placeholder="Confirm Password" onChange={onChangeHandler} />
-                    <label htmlFor="confirmPass">Confirm Password</label>
-                </div>
-                <br />
-                <button type='submit' className='btn btn-dark'>Update</button>
-            </form>
+                    <div className="form-floating mb-3">
+                        <input type="text" className="form-control" value={loggedUser.name} id="floatingInput" name='name' placeholder="name@example.com" onChange={onChangeHandler} />
+                        <label htmlFor='name'>Full Name</label>
+                    </div>
+
+                    <div className="form-floating mb-3">
+                        <input type="email" className="form-control" value={loggedUser.email} id="floatingInput" name='email' placeholder="name@example.com" onChange={onChangeHandler} />
+                        <label htmlFor="email">Email address</label>
+                    </div>
+
+                    <div className="form-floating mb-3">
+                        <input type="password" className="form-control" value={loggedUser.password} id="floatingPassword" name='password' placeholder="Password" onChange={onChangeHandler} />
+                        <label htmlFor="password">Password</label>
+                    </div>
+
+                    <div className="form-floating">
+                        <input type="password" className="form-control" name='confirmPass' value={loggedUser.confirmPass} id="floatingPassword" placeholder="Confirm Password" onChange={onChangeHandler} />
+                        <label htmlFor="confirmPass">Confirm Password</label>
+                    </div>
+                    <br />
+                    <button type='submit' className='btn btn-dark'>Update</button>
+                </form>
         </div>
+    </div>
+
 
     )
 }
