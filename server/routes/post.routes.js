@@ -1,8 +1,11 @@
-const PostController = require('../controllers/post.controller');
+const PostController = require("../controllers/post.controller")
+const { authenticate } = require('../config/jwt.config');
+
+
 
     module.exports = (app) => {
             
-            app.get('/api/post', PostController.findAllPosts);
+            app.get('/api/post',PostController.findAllPosts);
     
             app.post('/api/post', PostController.createNewPost);
     

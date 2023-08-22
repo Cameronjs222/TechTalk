@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const postSchema = new mongoose.Schema({
     title:{
         type:String,
@@ -11,14 +10,14 @@ const postSchema = new mongoose.Schema({
         required:[true, "Post content is required"],
         minLength:[4,"Content must be at least 4 characters long"],
     },
-    user:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'User'
-    },
-    user_name:{
-        type:String,
-        required:true
-    },
+    // user:{
+    //     type:mongoose.Schema.Types.ObjectId,
+    //     ref:'User'
+    // },
+    // user_name:{
+    //     type:String,
+    //     required:true
+    // },
 } , { timestamps:true });
 
-module.exports = mongoose.model('Post', postSchema);
+module.exports = mongoose.model('post', postSchema);

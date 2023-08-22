@@ -2,20 +2,21 @@ const post = require('../models/posts.model');
 
 module.exports.findAllPosts = (req, res) => {
     post.find()
-    .then((allPosts) => res.json({posts: allPosts}))
-    .catch(err => res.json({message: "Something went wrong", error: err}));
+        .then((allPosts) => res.json({posts: allPosts}))
+        .catch(err => res.json({message: "Something went wrong", error: err}));
 }
 
 module.exports.createNewPost = (req, res) => {
+    // console.log(req.body)
     post.create(req.body)
     .then(newlyCreatedPost => res.json({post: newlyCreatedPost}))
-    .catch(err => res.json({message: "Something went wrong", error: err}));
-}
+        .catch(err => res.status(400).json({message: "Something went wrong", error: err}));
+    }
 
 module.exports.findOneSinglePost = (req, res) => {
     post.findOne({_id: req.params.id})
-    .then(oneSinglePost => res.json({post: oneSinglePost}))
-    .catch(err => res.json({message: "Something went wrong", error: err}));
+        .then(oneSinglePost => res.json({post: oneSinglePost}))
+        .catch(err => res.status(400).json({message: "Something went wrong", error: err}));
 }
 
 module.exports.updateExistingPost = (req, res) => {
@@ -28,7 +29,7 @@ module.exports.updateExistingPost = (req, res) => {
     )
 
     .then(updatedPost => res.json({post: updatedPost}))
-    .catch(err => res.json({message: "Something went wrong", error: err}));
+    .catch(err => res.status(400).json({message: "Something went wrong", error: err}));
 }
 
 module.exports.deleteAnExistingPost = (req, res) => {
