@@ -15,7 +15,7 @@ const User = () => {
     const [following, setFollowing] = useState(false);
     const navigate = useNavigate();
 
-    console.log(user);
+    console.log(userId);
     console.log("^user^");
     console.log(currentUser);
     console.log("^currentUser^");
