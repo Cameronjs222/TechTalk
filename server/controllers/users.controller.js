@@ -17,6 +17,12 @@ module.exports = {
             .catch(err => res.json({ message: "Something went wrong", error: err }));
     },
 
+    findOneSingleUserById: (req, res) => {
+        User.findOne({ _id: req.params.id })
+            .then((oneSingleUser) => res.json({ user: oneSingleUser }))
+            .catch(err => res.json({ message: "Something went wrong", error: err }));
+    },
+
     register: async (req, res) => {
         try {
             const potentialUser = await User.findOne({ email: req.body.email });
@@ -120,6 +126,19 @@ module.exports = {
 
 
     },
+
+    updateExistingUserById: async (req, res) => {
+        User.findOneAndUpdate(
+            { _id: req.params.id },
+
+            req.body,
+
+            { new: true, runValidators: true }
+        )
+
+            .then(updatedUser => res.json({ user: updatedUser }))
+            .catch(err => res.json({ message: "Something went wrong", error: err }));
+        },
 
     deleteAnExistingUser: (req, res) => {
         User.deleteOne({ _id: req.params.id })
