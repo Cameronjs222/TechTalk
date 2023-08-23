@@ -26,9 +26,7 @@ function App() {
           } />
           <Route path="/viewPost/:id" element={<ViewPost setCurrentUser={setCurrentUser} currentUser={currentUser} />
           } />
-         <Route path="/User/:id" element={<User setCurrentUser={setCurrentUser} currentUser={currentUser} />
-          } />
-         <Route path="/User/:userId" element={<User setCurrentUser={setCurrentUser} currentUser={currentUser} />
+        <Route path="/User/:userId" element={<User setCurrentUser={setCurrentUser} currentUser={currentUser} />
           } />
           <Route path="/editUser" element={<EditUser setCurrentUser={setCurrentUser} currentUser={currentUser} />
           } /> 
