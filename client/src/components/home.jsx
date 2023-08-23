@@ -136,7 +136,7 @@ const Home = () => {
         </div>
 
         <div className='userLink'>
-          <p>Welcome <b>"{currentUser.name}Mark Jacobs"</b></p>
+          <p>Welcome <b>"{currentUser.name}"</b></p>
           <a href="/editUser"><button className='accInfo'>User Info</button></a>  <button onClick={logOut} className='logbutton'>Logout</button>
         </div>
       </div>
@@ -165,7 +165,7 @@ const Home = () => {
           <div className='comPost'><h2>Community Post</h2></div>
           <div>
             {post.map(post => (
-              <Link className='postLink' to={`/viewPost/${post._id}`} key={post._id}>
+              <Link className='postLink' to={`/User/${post.user}`} key={post._id}>
                 <div key={post._id} className='singlePost' style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
                   <span>Today's post by {post.user_name}: {post.title}</span>
                   <span>{post.content}</span>
