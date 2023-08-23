@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 
-
 import axios from "axios"
 import { useNavigate } from 'react-router-dom';
 const CreatePost = ({ setOnePost }) => {
@@ -82,4 +81,5 @@ const CreatePost = ({ setOnePost }) => {
         </div >
     )
 }
+
 export default CreatePost

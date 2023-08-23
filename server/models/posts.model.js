@@ -10,13 +10,13 @@ const postSchema = new mongoose.Schema({
         required:[true, "Post content is required"],
         minLength:[4,"Content must be at least 4 characters long"],
     },
-    // user:{
-    //     type:mongoose.Schema.Types.ObjectId,
-    //     ref:'User'
-    // },
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    },
     user_name:{
-        type:String,
-        required:true
+        type:String
+        
     },
 } , { timestamps:true });
 

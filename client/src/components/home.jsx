@@ -10,30 +10,21 @@ import { useNavigate, useParams } from 'react-router-dom';
 const Home = () => {
   const { id } = useParams();
 
-  const [user, setUser] = useState({
-    name: '',
-    email: '',
-    id: '',
-    role: '',
-    status: ''
-  })
-
-  function deleteUser() {
-    axios.delete('http://localhost:5000/api/users/1')
-      .then(res => {
-        setUser({
-          name: res.data.name,
-          email: res.data.email,
-          id: res.data.id,
-          role: res.data.role,
-          status: res.data.status
-        })
-      }
-      )
-      .catch(err => {
-        console.log(err)
-      })
-  }
+  // function deleteUser() {
+  //     axios.delete('http://localhost:5000/api/users/1')
+  //         .then(res => {
+  //             setUser({
+  //                 name: res.data.name,
+  //                 email: res.data.email,
+  //                 id: res.data.id,
+  //                 role: res.data.role,
+  //                 status: res.data.status
+  //             })
+  //         }
+  //         )
+  //         .catch(err => {
+  //             console.log(err)
+  //         })
   const [currentUser, setCurrentUser] = useState({});
   const [users, setUsers] = useState([]);
   const [following, setFollowing] = useState([]);
@@ -134,18 +125,13 @@ const Home = () => {
         <img src={logo} alt='Logo' id='logo2' />
         <div className='navLinks'>
 
-
           <a href="/create"><button className='addP'>Add a Post</button></a>
-          <a href=""><button className='allP'>All Posts</button></a>
           <a href="/viewPost"><button className='myP'>My Post</button></a>
-
         </div>
+
         <div className='userLink'>
-
-          <p>Welcome {currentUser.name} </p>
-          <a href="/editUser">Update Account Info</a> | <button onClick={logOut}>Logout</button>
-
-
+          <p>Welcome <b>"{currentUser.name}"</b></p>
+          <a href="/editUser"><button className='accInfo'>User Info</button></a>  <button onClick={logOut} className='logbutton'>Logout</button>
         </div>
       </div>
 
@@ -172,8 +158,8 @@ const Home = () => {
 
           <div className='comPost'><h2>Community Post</h2></div>
           <div>
-            {post.map(post => (
-              <Link className='postLink' to={`/viewPost/${post._id}`} key={post._id}>
+            {post.slice().reverse().map(post => (
+              <Link className='postLink' to={`/User/${post.user}`} key={post._id}>
                 <div key={post._id} className='singlePost' style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
                   <span>Today's post by {post.user_name}: {post.title}</span>
                   <Link to={`/edit/${post._id}`}><button className='addP'>Edit Post</button></Link>
@@ -189,4 +175,6 @@ const Home = () => {
   );
 };
 
+
 export default Home;
+

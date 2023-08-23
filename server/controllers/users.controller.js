@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 
+
 // module.exports.createNewUser = (req, res) => {
 //     User.create(req.body)
 //     .then(newlyCreatedUser => res.json({user: newlyCreatedUser}))
@@ -14,6 +15,12 @@ module.exports = {
     findAllUsers: (req, res) => {
         User.find()
             .then((allUsers) => res.json({ users: allUsers }))
+            .catch(err => res.json({ message: "Something went wrong", error: err }));
+    },
+
+    findOneSingleUserById: (req, res) => {
+        User.findOne({ _id: req.params.id })
+            .then((oneSingleUser) => res.json({ user: oneSingleUser }))
             .catch(err => res.json({ message: "Something went wrong", error: err }));
     },
 
@@ -121,6 +128,19 @@ module.exports = {
 
     },
 
+    updateExistingUserById: async (req, res) => {
+        User.findOneAndUpdate(
+            { _id: req.params.id },
+
+            req.body,
+
+            { new: true, runValidators: true }
+        )
+
+            .then(updatedUser => res.json({ user: updatedUser }))
+            .catch(err => res.json({ message: "Something went wrong", error: err }));
+        },
+
     deleteAnExistingUser: (req, res) => {
         User.deleteOne({ _id: req.params.id })
             .then(result => res.json({ result: result }))
@@ -133,4 +153,5 @@ module.exports = {
     }
 
 }
+
 
