@@ -41,7 +41,7 @@ const ViewPost = () => {
     useEffect(() => {
         axios.get(`http://localhost:8000/api/post/${id}`)
             .then(res => {
-                setPost(res.data)
+                setPost(res.data.post)
             })
             .catch(err => console.log(err))
     }, [])
@@ -68,6 +68,7 @@ const ViewPost = () => {
             .then(res => console.log(res))
             .catch(err => console.log(err))
     }
+    
 
 
     return (
@@ -81,7 +82,7 @@ const ViewPost = () => {
                     <a href=""><button className='myP'>My Post</button></a>
                 </div>
                 <div className='userLink'>
-                    <p>Welcome <b>"{currentUser.name}Mark Jacobs"</b></p>
+                    <p>Welcome <b>"{currentUser.name}"</b></p>
                     <a href="/editUser"><button className='accInfo'>User Info</button></a>  <button onClick={logOut} className='logbutton'>Logout</button>
 
                 </div>
@@ -91,9 +92,12 @@ const ViewPost = () => {
 
             <div className='viewCont'>
                 <div className='friendPost'>
-                    <div className='fpTitle'><h5>POST TITLE <br />(from database)</h5></div>
+                    <div className='fpTitle'>
+                        <h5>
+                        {post.title}<br />(from database)
+                        </h5></div>
                     <div className='fpost'>
-                        <p className='postInfo'>Post by: "the post's owner" </p>
+                        <p className='postInfo'>Post by: "{post.name}" </p>
                         <p className='postInfo2'>01/01/23 at 12:00 AM(from DB)</p>
                         <p className='iPost'>"this is the post  this is the post this is the post this is the post this is the post  this is the post this is the post  this is the post this is the post this is the post this is the post"</p>
                     </div>

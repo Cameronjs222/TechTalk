@@ -149,14 +149,12 @@ const User = () => {
 
                     <a href="/create"><button className='addP'>Add a Post</button></a>
                     <a href="/home"><button className='allP'>All Posts</button></a>
-                    <Link ><button className='myP'>My Post</button></Link>
 
                 </div>
                 <div className='userLink'>
-
-                    <p>Welcome {currentUser.name} </p>
-                    <a href="/updateuser?">Update Account Info</a> | <button onClick={logOut}>Logout</button>
-
+                  
+                    <p>Welcome <b>"{currentUser.name}"</b></p>
+                    <a href="/editUser"><button className='accInfo'>User Info</button></a>  <button onClick={logOut} className='logbutton'>Logout</button>
 
                 </div>
             </div>

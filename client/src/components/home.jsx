@@ -126,7 +126,7 @@ const Home = () => {
         <div className='navLinks'>
 
           <a href="/create"><button className='addP'>Add a Post</button></a>
-          <a href="/viewPost"><button className='myP'>My Post</button></a>
+          <a href="/User/:userid"><button className='myP'>My Posts</button></a>
         </div>
 
         <div className='userLink'>
