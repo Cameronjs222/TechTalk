@@ -12,6 +12,7 @@ const User = () => {
     const [post, setPost] = useState([]);
     const { userId } = useParams();
     const [user, setUser] = useState({})
+    const [following, setFollowing] = useState(false);
     const navigate = useNavigate();
 
     console.log(user);
@@ -76,11 +77,21 @@ const User = () => {
                 console.log(err);
             });
 
+
+        if (currentUser && currentUser.following && currentUser.following.includes(userId)) {
+            setFollowing(true);
+        }
     }, []);
+
+    useEffect(() => {
+        if (currentUser && currentUser.following && currentUser.following.includes(userId)) {
+            setFollowing(true);
+        }
+    }, [currentUser]);
 
     function followUser() {
 
-        if(currentUser.following.includes(user._id)) return;
+        if (currentUser.following.includes(user._id)) return;
 
         axios.patch(`http://localhost:8000/api/users/${currentUser._id}`, {
             following: [...currentUser.following, user._id]
@@ -136,9 +147,9 @@ const User = () => {
                 <img src={logo} alt='Logo' id='logo2' />
                 <div className='navLinks'>
 
-                    <a href=""><button className='addP'>Add a Post</button></a>
-                    <a href=""><button className='allP'>All Posts</button></a>
-                    <a href="/viewPost"><button className='myP'>My Post</button></a>
+                    <a href="/create"><button className='addP'>Add a Post</button></a>
+                    <a href="/home"><button className='allP'>All Posts</button></a>
+                    <Link ><button className='myP'>My Post</button></Link>
 
                 </div>
                 <div className='userLink'>
@@ -155,24 +166,44 @@ const User = () => {
                 <div className='allPost'>
                     <div className="comPost">
 
-                    {user._id === currentUser._id
-                        ? (<div className='comPost'><h2>My Post</h2></div>)
-                        : (<div className='comPost'><h2>{user.name}'s Post</h2></div>)
-                    }
-{user._id !== currentUser._id
-    ? (
-        <div className=''>
-            {currentUser.following.includes(user._id)
-                ? <button onClick={() => unfollowUser()} id='unfollowButton' className='addP'>unfollow</button>
-                : <button onClick={() => followUser()} id='followButton' className='addP'>follow</button>
-            }
-        </div>
-    )
-    : (
-        <div className='' style={{ display: 'none' }}>
-        </div>
-    )
-}
+                        {user._id === currentUser._id
+                            ? (<div className='comPost'><h2>My Post</h2></div>)
+                            : (<div className='comPost'><h2>{user.name}'s Post</h2></div>)
+                        }
+                        {user._id !== currentUser._id
+                            ? (
+                                <div className=''>
+                                    {following ? (
+                                        <button
+                                            onClick={() => {
+                                                unfollowUser();
+                                                setFollowing(false);
+                                            }}
+                                            id='unfollowButton'
+                                            className='addP'
+                                        >
+                                            Unfollow
+                                        </button>
+                                    ) : (
+                                        <button
+                                            onClick={() => {
+                                                followUser();
+                                                setFollowing(true);
+                                            }}
+                                            id='followButton'
+                                            className='addP'
+                                        >
+                                            Follow
+                                        </button>
+                                    )}
+
+                                </div>
+                            )
+                            : (
+                                <div className='' style={{ display: 'none' }}>
+                                </div>
+                            )
+                        }
                     </div>
                     <div>
                         {post.map(post => (
