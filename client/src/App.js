@@ -1,6 +1,6 @@
 import './App.css';
 import CreatePost from './components/CreatePost';
-import Home from "./components/Home"
+import Home from "./components/home"
 import ViewPost from "./components/viewPost"
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LoginReg from './components/LoginReg';
