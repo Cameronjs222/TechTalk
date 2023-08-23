@@ -132,11 +132,11 @@ const Home = () => {
         <div className='navLinks'>
 
           <a href="/create"><button className='addP'>Add a Post</button></a>
-          <a href="/viewPost"><button className='myP'>My Post</button></a>
+          <a href="/User/:userid"><button className='myP'>My Posts</button></a>
         </div>
 
         <div className='userLink'>
-          <p>Welcome <b>"{currentUser.name}Mark Jacobs"</b></p>
+          <p>Welcome <b>"{currentUser.name}"</b></p>
           <a href="/editUser"><button className='accInfo'>User Info</button></a>  <button onClick={logOut} className='logbutton'>Logout</button>
         </div>
       </div>

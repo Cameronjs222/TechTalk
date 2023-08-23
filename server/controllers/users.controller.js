@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 
-
 // module.exports.createNewUser = (req, res) => {
 //     User.create(req.body)
 //     .then(newlyCreatedUser => res.json({user: newlyCreatedUser}))
@@ -134,5 +133,3 @@ module.exports = {
     }
 
 }
-
-
