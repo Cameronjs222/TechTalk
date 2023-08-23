@@ -43,8 +43,6 @@ const Home = () => {
 
   console.log(following);
   console.log("^followers^");
-
-
   function logOut() {
     axios.post('http://localhost:8000/api/users/logout', {}, { withCredentials: true })
       .then(res => {
