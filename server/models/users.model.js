@@ -38,6 +38,9 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post'
     }],
+    last_post: {
+        type: Date
+    },
 }, {
     timestamps: true
 });

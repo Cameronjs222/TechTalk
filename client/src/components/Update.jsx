@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 const Update = () => {
     const { id } = useParams();
     const [errors, setErrors] = useState({})
+    const [currentUser, setCurrentUser] = useState({})
     const [updatePost, setUpdatePost] = useState({
         title: "",
         post: "",
@@ -19,6 +20,17 @@ const Update = () => {
             })
             .catch(err => console.log('SOmething went wrong FRONT END GET ALL', err))
     }, [id])
+
+    useEffect
+        (() => {
+            axios.get('http://localhost:8000/api/users/me', { withCredentials: true })
+                .then(res => {
+                    setCurrentUser(res.data.user);
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }, []);
     const submitHandler = (e) => {
         e.preventDefault();
         axios.patch(`http://localhost:8000/api/update/${id}`, updatePost,)

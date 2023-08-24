@@ -9,11 +9,23 @@ const UpdatePost = ({ setOnePost }) => {
 
     const { id } = useParams();
     const [errors, setErrors] = useState({})
+    const [currentUser, setCurrentUser] = useState({})
     const [updatePost, setUpdatePost] = useState({
         title: "",
         content: "",
         user_name: ""
     })
+
+    useEffect
+        (() => {
+            axios.get('http://localhost:8000/api/users/me', { withCredentials: true })
+                .then(res => {
+                    setCurrentUser(res.data.user);
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }, []);
     useEffect(() => {
         axios.get(`http://localhost:8000/api/post/${id}`)
             .then((res) => {
