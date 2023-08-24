@@ -159,6 +159,7 @@ const User = () => {
                             ...prevUser,
                             posts: updatedPosts
                         }));
+                        navigate("/home");
                     })
                     .catch(err => {
                         console.log(err);
