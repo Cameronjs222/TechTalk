@@ -18,6 +18,10 @@ const postSchema = new mongoose.Schema({
         type:String
         
     },
+    date:{
+        type:Date,
+    },
+    
 } , { timestamps:true });
 
 module.exports = mongoose.model('post', postSchema);
