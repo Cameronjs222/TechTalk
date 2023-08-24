@@ -13,8 +13,11 @@ const UpdatePost = ({ setOnePost }) => {
     const [updatePost, setUpdatePost] = useState({
         title: "",
         content: "",
-        user_name: ""
+        user_name: "",
+        user: ""
     })
+    console.log(currentUser)
+    console.log(updatePost)
 
     useEffect
         (() => {
@@ -55,9 +58,19 @@ const UpdatePost = ({ setOnePost }) => {
         setUpdatePost({ ...updatePost, [e.target.name]: e.target.value })
     }
 
-    if (currentUser._id !== updatePost.user) {
-        navigate("/home")
-    }
+    useEffect(() => {
+        if (currentUser && updatePost.user) {
+            if (currentUser._id !== updatePost.user) {
+                console.log("User and post mismatch. Redirecting...");
+                navigate("/home");
+            }
+        } else {
+            // Handle the case when either currentUser or updatePost is not available yet.
+            // You might want to show a loading indicator or handle this differently.
+            // For now, let's just return early without doing anything.
+            return;
+        }
+    }, [currentUser, updatePost, navigate]);
     return (
         <div class='row'>
             <style>{'body { background-color:#D2B48C;}'}</style>
