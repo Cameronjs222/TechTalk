@@ -319,7 +319,8 @@
 .allPost{
   margin: auto;
   font-family: 'Rozha One', serif;
-  overflow: scroll;
+  height: 600px;
+  
 }
 
 .hmFollow{
@@ -528,3 +529,22 @@ a{
   text-align: left;
 }
 
+.postContainer{
+  overflow: auto;
+  height: 530px;
+}
+
+.postContainer::-webkit-scrollbar {
+  width: 10px;
+}
+
+.postContainer::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color:  #f5e7e0;
+  border: 1px solid c;
+}
+
+.postContainer::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: #c66358;
+}

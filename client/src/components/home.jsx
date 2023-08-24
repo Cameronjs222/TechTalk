@@ -148,12 +148,13 @@ const Home = () => {
           <div className='postContainer'>
             {post.slice().reverse().map(post => (
               <Link className='postLink' to={`/viewPost/${post._id}`} key={post._id}>
-                <div key={post._id} className='singlePost' style={{ border: 'none', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
+                <div key={post._id} className='singlePost'>
                   <Link className='userLink' to={`/user/${post.user}`}>
                   <p className='comtitle'>
+                  Title:<b>"{post.title}</b>" <br />
                   Today's post by: {post.user_name} <br />
-                  Title:<b>"{post.title}</b>"
                   </p></Link>
+
                   <span>{post.content} <br /></span>
                 </div>
               </Link>

@@ -94,7 +94,7 @@ const EditUser = (props) => {
                     <a href="/editUser"><button className='accInfo'>User Info</button></a>  <button onClick={logOut} className='logbutton'>Logout</button>
             </div>
         </div>
-dadfs
+
             <div className='formUp'>
                 <h1>UPDATE USER INFO</h1>
                 <form className='logForm' onSubmit={editUser}>
