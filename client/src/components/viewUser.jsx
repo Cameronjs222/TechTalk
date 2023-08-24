@@ -19,8 +19,8 @@ const User = () => {
     console.log("^user^");
     console.log(currentUser);
     console.log("^currentUser^");
-    // console.log(post);
-    // console.log("^post^");
+    console.log(post);
+    console.log("^post^");
 
 
 
@@ -38,13 +38,17 @@ const User = () => {
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/users/me', { withCredentials: true })
-            .then(res => {
-                console.log(res)
-                setCurrentUser(res.data.user);
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        .then(res => {
+            console.log(res)
+            setCurrentUser(res.data.user);
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }, []);
+    
+    useEffect(() => {
+
 
         axios.get(`http://localhost:8000/api/users/${userId}`)
             .then(res => {
@@ -81,13 +85,13 @@ const User = () => {
         if (currentUser && currentUser.following && currentUser.following.includes(userId)) {
             setFollowing(true);
         }
-    }, []);
+    }, [userId, currentUser]);
 
     useEffect(() => {
         if (currentUser && currentUser.following && currentUser.following.includes(userId)) {
             setFollowing(true);
         }
-    }, [currentUser]);
+    }, [currentUser, userId]);
 
     function followUser() {
 
@@ -140,6 +144,31 @@ const User = () => {
             });
     }
 
+
+    // const deletePost = (postId) => {
+    //     axios.delete(`http://localhost:8000/api/post/${postId}`)
+    //         .then(res => {
+    //             console.log(res);
+    //             const updatedPosts = currentUser.posts.filter(id => id !== postId);
+    //             axios.patch(`http://localhost:8000/api/users/${currentUser._id}`, {
+    //                 posts: updatedPosts
+    //             }, { withCredentials: true })
+    //                 .then(res => {
+    //                     console.log(res);
+    //                     setCurrentUser(prevUser => ({
+    //                         ...prevUser,
+    //                         posts: updatedPosts
+    //                     }));
+    //                 })
+    //                 .catch(err => {
+    //                     console.log(err);
+    //                 });
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //         });
+    // }
+    
 
     return (
         <div className='mainDivHome'>
@@ -209,6 +238,30 @@ const User = () => {
                                 <div key={post._id} className='singlePost' style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
                                     <span>Today's post by {post.user_name}: {post.title}</span>
                                     <span>{post.content}</span>
+                                    {/* {user._id === currentUser._id
+                                        ? (
+                                            <div className=''>
+                                                <button
+                                                    onClick={() => {
+                                                        deletePost(post._id);
+                                                    }}
+                                                    id='deleteButton'
+                                                    className='addP'
+                                                >
+                                                    Delete
+                                                </button>
+                                                <button>
+                                                    <Link to={`/editPost/${post._id}`} key={post._id}>
+                                                        Edit
+                                                    </Link>
+                                                </button>
+                                            </div>
+                                        )
+                                        : (
+                                            <div className='' style={{ display: 'none' }}>
+                                            </div>
+                                        )
+                                    } */}
                                 </div>
                             </Link>
                         ))}
