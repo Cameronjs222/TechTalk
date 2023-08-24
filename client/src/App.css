@@ -508,4 +508,20 @@ a{
   text-decoration-color: #e7e7e7;
 }
 
+.userLink {
+  color: #c66258;
+}
+
+.userLink:hover{
+  color: #802226;
+}
+
+.followerLink {
+  color: #f5e6e0;
+}
+
+.followerLink:hover{
+  color: #802226;
+}
+
 
