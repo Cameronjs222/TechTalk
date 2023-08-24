@@ -2,6 +2,8 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import logo from '../img/logo2-4.jpg';
 
 const UpdatePost = ({ setOnePost }) => {
 
@@ -71,30 +73,57 @@ const UpdatePost = ({ setOnePost }) => {
             return;
         }
     }, [currentUser, updatePost, navigate]);
+
+
+    function logOut() {
+        axios.post('http://localhost:8000/api/users/logout', {}, { withCredentials: true })
+          .then(res => {
+            setCurrentUser()
+            navigate("/")
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      }
+
     return (
-        <div class='row'>
-            <style>{'body { background-color:#D2B48C;}'}</style>
+        <div className='mainAddPost'>
+        <div className='navBar'>
+          <img src={logo} alt='Logo' id='logo2' />
+            <div className='navLinks'>
+                <a href="/home"><button className='allP'>All Posts</button></a>
+                <Link to={`/user/${currentUser._id}`}><button className='myP'>My Post</button></Link>
+            </div>
 
-            <div className='row justify-content-center'>
+            <div className='userLink'>
+                <p>Welcome <b>"{currentUser.name}"</b></p>
+                    <a href="/editUser"><button className='accInfo'>User Info</button></a>  <button onClick={logOut} className='logbutton'>Logout</button>
+            </div>
+        </div>
+
+                             <div className="addPostDiv">
+
+                                     <h1>Update your Post </h1>
+                                     <p className='sign24'><i>"Post once every 24 hours"</i></p>
+
+                                 <form onSubmit={submitHandler} >
+                                     <div>
+                                         <div>
+                                         {errors.day ? <p> {errors.day} </p> : null}
+                                            {errors.title ? <p> {errors.title?.message} </p> : null}
+                                            {errors.content && <p> {errors.content?.message}  </p>}
+                                             <div  id='topTitle'>
+                                                 <input type="text" value={updatePost.title} id='inputTitle' name="title" placeholder='Add Title Here' className="form-control"onChange={changeHandler} />
+                                             </div>
+
+                                             <div>
+                                                 <textarea name="content" value={updatePost.content} id='addPpost' placeholder='Add Post Here' rows="50" cols="50" className="form-control" onChange={changeHandler} />
+                                             </div>
 
 
-                <div className="row">
-                    <form className="col-md-4 offset-1" onSubmit={submitHandler} >
-                        <div className='d-flex p-2 justify-content-between'>
-                            <h2 style={{ color: 'red' }}>Update Post</h2>
-                        </div>
-                        <div className="form-group ">
-                            <p>
-                                {
-                                    errors.title ? <p> {errors.title.message} </p> : null
-                                }
+                                             <button className="btn btn-dark" type="submit" >Add a Post</button>
 
-                                <label> Title:</label>
-                                <input name="title" placeholder='Type here.......... ' className="form-control  "
-                                    onChange={changeHandler} value={updatePost.title}
-                                />
-                            </p>
-                            <p>
+                                             {/* <p>
                                 {
                                     updatePost.user_name ? <div><label> User Name :</label>
                                         <input name="user_name" placeholder='Type.......' className="form-control  "
@@ -105,26 +134,15 @@ const UpdatePost = ({ setOnePost }) => {
 
                                 }
 
-                            </p>
-                            <div></div>
-                            <p>
-                                {
-                                    errors.content && <p> {errors.content?.message}  </p>
-                                }
-                                <label> Content :</label>
-                                <textarea name="content" rows="4" cols="50" placeholder='Type here......' className="form-control"
-                                    onChange={changeHandler} value={updatePost.content}
-                                ></textarea>
-                            </p>
-                            <div />
-                            <button className="btn btn-success mt-3" type="submit" >Edit Post</button>
-
-                        </div>
-
-                    </form>
-                </div>
-            </div >
-        </div >
+                            </p> */}
+                                         </div>
+                                         </div>
+                                         </form> 
+                                         </div> 
+                                                                               
+        
+</div>
+      
     )
 }
 export default UpdatePost
