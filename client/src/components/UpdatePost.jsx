@@ -54,6 +54,10 @@ const UpdatePost = ({ setOnePost }) => {
     const changeHandler = (e) => {
         setUpdatePost({ ...updatePost, [e.target.name]: e.target.value })
     }
+
+    if (currentUser._id !== updatePost.user) {
+        navigate("/home")
+    }
     return (
         <div class='row'>
             <style>{'body { background-color:#D2B48C;}'}</style>
