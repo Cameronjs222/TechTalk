@@ -1,50 +1,31 @@
 const post = require('../models/posts.model');
-
-<<<<<<< HEAD
-module.exports.findAllPosts = (req, res) => {
-    post.find()
-        .then((allPosts) => res.json({posts: allPosts}))
-        .catch(err => res.json({message: "Something went wrong", error: err}));
-}
-
-module.exports.createNewPost = (req, res) => {
-    // console.log(req.body)
-    post.create(req.body)
-    .then(newlyCreatedPost => res.json({post: newlyCreatedPost}))
-        .catch(err => res.status(400).json({message: "Something went wrong", error: err}));
-    }
-
-module.exports.findOneSinglePost = (req, res) => {
-    post.findOne({_id: req.params.id})
-        .then(oneSinglePost => res.json({post: oneSinglePost}))
-        .catch(err => res.status(400).json({message: "Something went wrong", error: err}));
-}
-=======
+const User = require('../models/users.model');
+const jwt = require('jsonwebtoken');
 module.exports = {
-
     findAllPosts: (req, res) => {
         post.find()
             .then((allPosts) => res.json({ posts: allPosts }))
             .catch(err => res.json({ message: "Something went wrong", error: err }));
     },
-
->>>>>>> main
-
     createNewPost: async (req, res) => {
         console.log("Received a request to create a new post");
         console.log("Request body:", req.body);
-    
+        const token = req.cookies.userToken;
+        console.log("token",token)
+        const decoded = jwt.verify(token, process.env.SECRET_KEY);
+        console.log("decoded",decoded)
+        
         try {
-            const newlyCreatedPost = await post.create(req.body);
+            const newlyCreatedPost = await post.create({...req.body,user:decoded._id});
+        
             console.log("New post created:", newlyCreatedPost);
             res.json({ post: newlyCreatedPost });
         } catch (err) {
             console.error("Error creating post:", err);
-            res.status(500).json({ message: "Something went wrong", error: err });
+            res.status(400).json({ message: "Something went wrong", error: err });
         }
     }
     ,
-
 
     findOneSinglePost: (req, res) => {
         post.findOne({ _id: req.params.id })
@@ -52,12 +33,6 @@ module.exports = {
             .catch(err => res.json({ message: "Something went wrong", error: err }));
     },
 
-<<<<<<< HEAD
-    .then(updatedPost => res.json({post: updatedPost}))
-    .catch(err => res.status(400).json({message: "Something went wrong", error: err}));
-}
-=======
->>>>>>> main
 
     updateExistingPost: async (req, res) => {
         await post.findOneAndUpdate(
