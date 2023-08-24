@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import axios from "axios"
 import { useNavigate } from 'react-router-dom';
 const CreatePost = ({ setOnePost }) => {
@@ -15,7 +14,7 @@ const CreatePost = ({ setOnePost }) => {
     }
     const submitHandler = (e) => {
         e.preventDefault()
-        axios.post("http://localhost:8000/api/post", postInfo)
+        axios.post("http://localhost:8000/api/post/create", postInfo, { withCredentials: true })
             .then(res => {
                 console.log('FRONT END CREATE', res);
                 console.log('FRONT END CREATE RES DATA', res.data)
@@ -24,7 +23,7 @@ const CreatePost = ({ setOnePost }) => {
             })
             .catch(err => {
                 console.log("something went wrong FRONT END CREATE", err);
-                setErrors(err.response.data.error.errors)
+                setErrors(err.response.data.errors)
             })
     }
     return (

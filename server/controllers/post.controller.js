@@ -1,29 +1,32 @@
-const post = require('../models/posts.model');
+const post = require('../models/posts.model')
+const User = require('../models/users.model');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
-
     findAllPosts: (req, res) => {
         post.find()
             .then((allPosts) => res.json({ posts: allPosts }))
             .catch(err => res.json({ message: "Something went wrong", error: err }));
     },
-
-
     createNewPost: async (req, res) => {
         console.log("Received a request to create a new post");
         console.log("Request body:", req.body);
-    
+        const token = req.cookies.userToken;
+        console.log("token",token)
+        const decoded = jwt.verify(token, process.env.SECRET_KEY);
+        console.log("decoded",decoded)
+        
         try {
-            const newlyCreatedPost = await post.create(req.body);
+            const newlyCreatedPost = await post.create({...req.body,user:decoded._id});
+        
             console.log("New post created:", newlyCreatedPost);
             res.json({ post: newlyCreatedPost });
         } catch (err) {
             console.error("Error creating post:", err);
-            res.status(500).json({ message: "Something went wrong", error: err });
+            res.status(400).json({ message: "Something went wrong", error: err });
         }
     }
     ,
-
 
     findOneSinglePost: (req, res) => {
         post.findOne({ _id: req.params.id })

@@ -5,7 +5,6 @@ module.exports.findAllComments = (req, res) => {
     .then((allComments) => res.json({comments: allComments}))
     .catch(err => res.json({message: "Something went wrong", error: err}));
 }
-
 module.exports.createNewComment = (req, res) => {
     comment.create(req.body)
     .then(newlyCreatedComment => res.json({comment: newlyCreatedComment}))
@@ -17,7 +16,6 @@ module.exports.findOneSingleComment = (req, res) => {
     .then(oneSingleComment => res.json({comment: oneSingleComment}))
     .catch(err => res.json({message: "Something went wrong", error: err}));
 }
-
 module.exports.updateExistingComment = (req, res) => {
     comment.findOneAndUpdate(
         {_id: req.params.id},
