@@ -500,4 +500,12 @@ a{
   color: #a7a2a0;
 }
 
+.buttonContainerUserPage{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  color: #f5e7e0;
+  text-decoration-color: #e7e7e7;
+}
+
 
