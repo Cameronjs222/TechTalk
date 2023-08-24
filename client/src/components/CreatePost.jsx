@@ -70,7 +70,7 @@ const CreatePost = ({ setOnePost }) => {
                         console.log(err)
                     })
                 
-                // navigate("/home") need to test without redirecting
+                navigate("/home")
             })
             .catch(err => {
                 console.log("something went wrong FRONT END CREATE", err);
