@@ -121,7 +121,7 @@ const UpdatePost = ({ setOnePost }) => {
                                              </div>
 
 
-                                             <button className="btn btn-dark" type="submit" >Add a Post</button>
+                                             <button className="btn btn-dark" type="submit" >Update Post</button>
 
                                              {/* <p>
                                 {
