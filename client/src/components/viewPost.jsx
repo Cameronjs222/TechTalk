@@ -114,7 +114,8 @@ const ViewPost = () => {
                 <div className='friendPost'>
                     <div className='fpTitle'>
                         <h5>
-                            {post.title}<br />(from database)
+                            Post Title: <br/>
+                            {post.title}<br />
                         </h5></div>
                     <div className='fpost'>
                         <p className='postInfo'>Post by: "{post.user_name}" </p>
