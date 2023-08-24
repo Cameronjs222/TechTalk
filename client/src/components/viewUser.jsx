@@ -145,29 +145,29 @@ const User = () => {
     }
 
 
-    // const deletePost = (postId) => {
-    //     axios.delete(`http://localhost:8000/api/post/${postId}`)
-    //         .then(res => {
-    //             console.log(res);
-    //             const updatedPosts = currentUser.posts.filter(id => id !== postId);
-    //             axios.patch(`http://localhost:8000/api/users/${currentUser._id}`, {
-    //                 posts: updatedPosts
-    //             }, { withCredentials: true })
-    //                 .then(res => {
-    //                     console.log(res);
-    //                     setCurrentUser(prevUser => ({
-    //                         ...prevUser,
-    //                         posts: updatedPosts
-    //                     }));
-    //                 })
-    //                 .catch(err => {
-    //                     console.log(err);
-    //                 });
-    //         })
-    //         .catch(err => {
-    //             console.log(err);
-    //         });
-    // }
+    const deletePost = (postId) => {
+        axios.delete(`http://localhost:8000/api/post/${postId}`)
+            .then(res => {
+                console.log(res);
+                const updatedPosts = currentUser.posts.filter(id => id !== postId);
+                axios.patch(`http://localhost:8000/api/users/${currentUser._id}`, {
+                    posts: updatedPosts
+                }, { withCredentials: true })
+                    .then(res => {
+                        console.log(res);
+                        setCurrentUser(prevUser => ({
+                            ...prevUser,
+                            posts: updatedPosts
+                        }));
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
     
 
     return (
@@ -238,30 +238,27 @@ const User = () => {
                                 <div key={post._id} className='singlePost' style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
                                     <span>Today's post by {post.user_name}: {post.title}</span>
                                     <span>{post.content}</span>
-                                    {/* {user._id === currentUser._id
+                                    {user._id === currentUser._id
                                         ? (
-                                            <div className=''>
+                                            <div className='buttonContainerUserPage'>
                                                 <button
                                                     onClick={() => {
                                                         deletePost(post._id);
                                                     }}
                                                     id='deleteButton'
-                                                    className='addP'
+                                                    className='allP'
                                                 >
                                                     Delete
                                                 </button>
-                                                <button>
-                                                    <Link to={`/editPost/${post._id}`} key={post._id}>
-                                                        Edit
-                                                    </Link>
-                                                </button>
+                                                <Link to={`/edit/${post._id}`}><button className='allP'>Edit</button></Link>
+
                                             </div>
                                         )
                                         : (
                                             <div className='' style={{ display: 'none' }}>
                                             </div>
                                         )
-                                    } */}
+                                    }
                                 </div>
                             </Link>
                         ))}
