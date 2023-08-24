@@ -15,7 +15,11 @@ const CreatePost = ({ setOnePost }) => {
 
     console.log(currentUser);
     const changeHandler = (e) => {
-        setPostInfo({ ...postInfo, [e.target.name]: e.target.value, user_name: currentUser.name, user: currentUser._id })
+        setPostInfo({ 
+            ...postInfo,
+            [e.target.name]: e.target.value,
+            user_name: currentUser.name, 
+            user: currentUser._id })
     }
     const submitHandler = (e) => {
         e.preventDefault()
@@ -29,7 +33,7 @@ const CreatePost = ({ setOnePost }) => {
         ) {
             setErrors({
                 ...errors,
-                title: "You can only post once every 24 hours."
+                day: "You can only post once every 24 hours."
             });
             console.log("You can only post once every 24 hours.");
             console.log(errors);
@@ -132,12 +136,15 @@ const CreatePost = ({ setOnePost }) => {
                 <div className="row">
                     <form className="col-md-4 offset-1 mt-3" onSubmit={submitHandler} >
                         <h4 style={{ color: 'red' }}>What would you like to Post?</h4>
+            {
+                errors.day ? <p> {errors.day} </p> : null
+            }
 
                         <div className="form-group ">
                             <div className='input-group flex-nowrap'>
                                 <p>
                                     {
-                                        errors?.title ? <p> {errors.title?.message} </p> : null
+                                        errors.title ? <p> {errors.title?.message} </p> : null
                                     }
                                     <label> Title:</label>
                                     <input type="text" name="title" placeholder=' Type here......' className="form-control"
@@ -160,7 +167,7 @@ const CreatePost = ({ setOnePost }) => {
                             <div>
                                 <p>
                                     {
-                                        errors?.content && <p> {errors.content?.message}  </p>
+                                        errors.content && <p> {errors.content?.message}  </p>
                                     }
                                     <label> Content :</label>
                                     <textarea name="content" rows="4" cols="50" placeholder='Type here......' className="form-control"
