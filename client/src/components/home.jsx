@@ -115,7 +115,7 @@ const Home = () => {
         <div className='navLinks'>
 
           <a href="/create"><button className='addP'>Add a Post</button></a>
-          <a href="/User/:userid"><button className='myP'>My Posts</button></a>
+          <Link to={`/user/${currentUser._id}`}><button className='allP'>My Post</button></Link>
         </div>
 
         <div className='userLink'>
@@ -150,8 +150,6 @@ const Home = () => {
               <Link className='postLink' to={`/viewPost/${post._id}`} key={post._id}>
                 <div key={post._id} className='singlePost' style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
                   <span>Today's post by {post.user_name}: {post.title}</span>
-                  <Link to={`/edit/${post._id}`}><button className='addP'>Edit Post</button></Link>
-
                   <span>{post.content}</span>
                 </div>
               </Link>
