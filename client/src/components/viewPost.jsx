@@ -13,7 +13,13 @@ const ViewPost = () => {
     const { id } = useParams();
     const [currentUser, setCurrentUser] = useState({});
     const [post, setPost] = useState({});
-    const [comment, setComment] = useState({});
+    const [comment, setComment] = useState({
+        content: '',
+        date: Date.now(),
+        user_name: currentUser.name,
+        user: currentUser._id,
+    });
+    const [commentList, setCommentList] = useState([]);
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/users/me', { withCredentials: true })
@@ -49,7 +55,7 @@ const ViewPost = () => {
     useEffect(() => {
         axios.get("http://localhost:8000/api/comment")
             .then(res => {
-                setComment(res.data)
+                setCommentList(res.data.comments)
             })
             .catch(err => console.log(err))
     }, [])
@@ -57,7 +63,10 @@ const ViewPost = () => {
     function onChangeHandler(e) {
         setComment({
             ...comment,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            user_name: currentUser.name,
+            user: currentUser._id,
+            date: Date.now(),
         })
     }
 
@@ -65,8 +74,19 @@ const ViewPost = () => {
     function submitComment(e) {
         e.preventDefault();
         axios.post("http://localhost:8000/api/comment", comment)
-            .then(res => console.log(res))
+            .then(res => {
+                setCommentList(prevComments => [...prevComments, res.data.comment]);
+                window.location.reload();
+            })
             .catch(err => console.log(err))
+    }
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
     }
     
 
@@ -94,29 +114,42 @@ const ViewPost = () => {
                 <div className='friendPost'>
                     <div className='fpTitle'>
                         <h5>
-                        {post.title}<br />(from database)
+                            {post.title}<br />(from database)
                         </h5></div>
                     <div className='fpost'>
-                        <p className='postInfo'>Post by: "{post.name}" </p>
-                        <p className='postInfo2'>01/01/23 at 12:00 AM(from DB)</p>
-                        <p className='iPost'>"this is the post  this is the post this is the post this is the post this is the post  this is the post this is the post  this is the post this is the post this is the post this is the post"</p>
+                        <p className='postInfo'>Post by: "{post.user_name}" </p>
+                        <p className='postInfo2'>{formatDate(post.date)}</p>
+                        <p className='iPost'>{post.content}</p>
                     </div>
                 </div>
                 <p className='coms'>Comments:</p>
                 <div className='comments'>
                     {/* this is where the comments will be displayed in a potential for loop */}
                     {/*for loop */}
-                    <div className='comnts'><p className='icom'>comment text Here! comment text Here! comment text Here! comment text Here! comment text Here! comment text Here! comment text Here! comment text Here!</p></div>
+
+                    {
+                        commentList?.map((comment, commentidx) => (
+                            <div key={commentidx}>
+                                <div className='comnts'><p className='icom'>{comment.content}</p></div>
+                                <div className='comUser'>
+                                    Comment by: {comment.user_name} <br />
+                                    {formatDate(comment.date)}
+                                </div> <br />
+                            </div>
+                        ))
+                    }
+
+                    {/* <div className='comnts'><p className='icom'>{comment.content}</p></div>
                     <div className='comUser'>
-                        Comment by: "comment's owner" <br />
+                        Comment by: {comment.user_name} <br />
                         09/23/2023 at 1:45 PM
                     </div> <br />
                     {/* just to see how it looks like when theres more comments */}
-                    <div className='comnts'><p className='icom'>ce! comment tntr text Here! comment text Here!</p></div>
+                    {/* <div className='comnts'><p className='icom'>ce! comment tntr text Here! comment text Here!</p></div>
                     <div className='comUser'>
                         Comment by: "comment's owner" <br />
                         09/23/2023 at 1:45 PM
-                    </div> <br />
+                    </div> <br /> */}
 
 
                     {/*end for loop */}
