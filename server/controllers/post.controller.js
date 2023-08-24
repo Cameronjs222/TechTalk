@@ -1,6 +1,7 @@
-const post = require('../models/posts.model');
+const post = require('../models/posts.model')
 const User = require('../models/users.model');
 const jwt = require('jsonwebtoken');
+
 module.exports = {
     findAllPosts: (req, res) => {
         post.find()

@@ -106,17 +106,6 @@ const Home = () => {
     getFollowingList();
   }, [currentUser]);
 
-  // const deletePost = (id) => {
-  //   axios.delete(`http://localhost:8000/api/post/${id}`)
-  //     .then(res => {
-  //       console.log(res.data);
-  //       setPost(post.filter(post => post._id !== id));
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  // }
-
 
 
   return (
@@ -126,7 +115,7 @@ const Home = () => {
         <div className='navLinks'>
 
           <a href="/create"><button className='addP'>Add a Post</button></a>
-          <a href="/viewPost"><button className='myP'>My Post</button></a>
+          <a href="/User/:userid"><button className='myP'>My Posts</button></a>
         </div>
 
         <div className='userLink'>
@@ -136,7 +125,6 @@ const Home = () => {
       </div>
 
       <div className='homeMain'>
-        {/* <button onClick={addFollower}>Add followers</button> */}
         <div className='hmFollow'>
           <div className='h2follow'><h2>Following</h2></div>
           <div className='listFollow'>
@@ -157,9 +145,9 @@ const Home = () => {
         <div className='allPost'>
 
           <div className='comPost'><h2>Community Post</h2></div>
-          <div>
+          <div className='postContainer'>
             {post.slice().reverse().map(post => (
-              <Link className='postLink' to={`/User/${post.user}`} key={post._id}>
+              <Link className='postLink' to={`/viewPost/${post._id}`} key={post._id}>
                 <div key={post._id} className='singlePost' style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
                   <span>Today's post by {post.user_name}: {post.title}</span>
                   <Link to={`/edit/${post._id}`}><button className='addP'>Edit Post</button></Link>

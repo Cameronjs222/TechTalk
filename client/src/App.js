@@ -1,6 +1,6 @@
 import './App.css';
 import CreatePost from './components/CreatePost';
-import Home from "./components/Home"
+import Home from "./components/home"
 import ViewPost from "./components/viewPost"
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LoginReg from './components/LoginReg';
@@ -24,9 +24,9 @@ function App() {
           <Route path='/' element={<Navigate to='/login'></Navigate>}></Route>
           <Route path="/home" element={<Home setCurrentUser={setCurrentUser} currentUser={currentUser} />
           } />
-          <Route path="/viewPost" element={<ViewPost setCurrentUser={setCurrentUser} currentUser={currentUser} />
+          <Route path="/viewPost/:id" element={<ViewPost setCurrentUser={setCurrentUser} currentUser={currentUser} />
           } />
-         <Route path="/User/:userId" element={<User setCurrentUser={setCurrentUser} currentUser={currentUser} />
+        <Route path="/User/:userId" element={<User setCurrentUser={setCurrentUser} currentUser={currentUser} />
           } />
           <Route path="/editUser" element={<EditUser setCurrentUser={setCurrentUser} currentUser={currentUser} />
           } /> 
