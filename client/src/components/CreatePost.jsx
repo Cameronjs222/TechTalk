@@ -24,22 +24,22 @@ const CreatePost = ({ setOnePost }) => {
     }
     const submitHandler = (e) => {
         e.preventDefault()
-        // const lastPostDate = new Date(currentUser.last_post);
-        // const currentDate = new Date();
+        const lastPostDate = new Date(currentUser.last_post);
+        const currentDate = new Date();
 
-        // if (
-        //     lastPostDate.getDate() === currentDate.getDate() &&
-        //     lastPostDate.getMonth() === currentDate.getMonth() &&
-        //     lastPostDate.getFullYear() === currentDate.getFullYear()
-        // ) {
-        //     setErrors({
-        //         ...errors,
-        //         day: "You can only post once every 24 hours."
-        //     });
-        //     console.log("You can only post once every 24 hours.");
-        //     console.log(errors);
-        //     return;
-        // }
+        if (
+            lastPostDate.getDate() === currentDate.getDate() &&
+            lastPostDate.getMonth() === currentDate.getMonth() &&
+            lastPostDate.getFullYear() === currentDate.getFullYear()
+        ) {
+            setErrors({
+                ...errors,
+                day: "You can only post once every 24 hours."
+            });
+            console.log("You can only post once every 24 hours.");
+            console.log(errors);
+            return;
+        }
 
 
 

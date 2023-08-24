@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../img/logo2-4.jpg';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 
 const ViewPost = () => {
@@ -99,7 +99,7 @@ const ViewPost = () => {
 
                     <a href="/create"><button className='addP'>Add a Post</button></a>
                     <a href="/home"><button className='allP'>All Posts</button></a>
-                    <a href=""><button className='myP'>My Post</button></a>
+                    <Link to={`/user/${currentUser._id}`}><button className='myP'>My Post</button></Link>
                 </div>
                 <div className='userLink'>
                     <p>Welcome <b>"{currentUser.name}"</b></p>

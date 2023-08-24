@@ -133,7 +133,7 @@ const Home = () => {
                 <li>You have not added any followers yet.</li>
               ) : (
                 following.map(user => (
-                  <Link to={`/user/${user._id}`} key={user._id}>
+                  <Link className='followerLink' to={`/user/${user._id}`} key={user._id}>
                     <li key={user._id}>{user.name}</li>
                   </Link>
                 ))
@@ -149,7 +149,7 @@ const Home = () => {
             {post.slice().reverse().map(post => (
               <Link className='postLink' to={`/viewPost/${post._id}`} key={post._id}>
                 <div key={post._id} className='singlePost' style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
-                  <span>Today's post by {post.user_name}: {post.title}</span>
+                  <Link className='userLink' to={`/user/${post.user}`}><span>Today's post by {post.user_name}: {post.title}</span></Link>
                   <span>{post.content}</span>
                 </div>
               </Link>
