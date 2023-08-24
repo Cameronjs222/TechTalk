@@ -3,45 +3,39 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import logo from '../img/logo2-4.jpg';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+
+
 
 const Home = () => {
-  const [user, setUser] = useState({
-        name: '',
-        email: '',
-        id: '',
-        role: '',
-        status: ''
-    })
+  const { id } = useParams();
 
-    // function deleteUser() {
-    //     axios.delete('http://localhost:5000/api/users/1')
-    //         .then(res => {
-    //             setUser({
-    //                 name: res.data.name,
-    //                 email: res.data.email,
-    //                 id: res.data.id,
-    //                 role: res.data.role,
-    //                 status: res.data.status
-    //             })
-    //         }
-    //         )
-    //         .catch(err => {
-    //             console.log(err)
-    //         })
-  const[currentUser, setCurrentUser] = useState({});
+  // function deleteUser() {
+  //     axios.delete('http://localhost:5000/api/users/1')
+  //         .then(res => {
+  //             setUser({
+  //                 name: res.data.name,
+  //                 email: res.data.email,
+  //                 id: res.data.id,
+  //                 role: res.data.role,
+  //                 status: res.data.status
+  //             })
+  //         }
+  //         )
+  //         .catch(err => {
+  //             console.log(err)
+  //         })
+  const [currentUser, setCurrentUser] = useState({});
   const [users, setUsers] = useState([]);
   const [following, setFollowing] = useState([]);
   const [post, setPost] = useState([]);
   const navigate = useNavigate();
- 
- 
+
+
   console.log(following);
   console.log("^followers^");
-
-
   function logOut() {
-    axios.post('http://localhost:8000/api/users/logout',{}, { withCredentials: true })
+    axios.post('http://localhost:8000/api/users/logout', {}, { withCredentials: true })
       .then(res => {
         setCurrentUser()
         navigate("/")
@@ -52,7 +46,7 @@ const Home = () => {
   }
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/users/me',  { withCredentials: true })
+    axios.get('http://localhost:8000/api/users/me', { withCredentials: true })
       .then(res => {
         setCurrentUser(res.data.user);
       })
@@ -112,17 +106,6 @@ const Home = () => {
     getFollowingList();
   }, [currentUser]);
 
-  // const deletePost = (id) => {
-  //   axios.delete(`http://localhost:8000/api/post/${id}`)
-  //     .then(res => {
-  //       console.log(res.data);
-  //       setPost(post.filter(post => post._id !== id));
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  // }
-
 
 
   return (
@@ -132,7 +115,7 @@ const Home = () => {
         <div className='navLinks'>
 
           <a href="/create"><button className='addP'>Add a Post</button></a>
-          <a href="/viewPost"><button className='myP'>My Post</button></a>
+          <Link to={`/user/${currentUser._id}`}><button className='allP'>My Post</button></Link>
         </div>
 
         <div className='userLink'>
@@ -142,7 +125,6 @@ const Home = () => {
       </div>
 
       <div className='homeMain'>
-        {/* <button onClick={addFollower}>Add followers</button> */}
         <div className='hmFollow'>
           <div className='h2follow'><h2>Following</h2></div>
           <div className='listFollow'>
@@ -151,7 +133,7 @@ const Home = () => {
                 <li>You have not added any followers yet.</li>
               ) : (
                 following.map(user => (
-                  <Link to={`/user/${user._id}`} key={user._id}>
+                  <Link className='followerLink' to={`/user/${user._id}`} key={user._id}>
                     <li key={user._id}>{user.name}</li>
                   </Link>
                 ))
@@ -163,11 +145,11 @@ const Home = () => {
         <div className='allPost'>
 
           <div className='comPost'><h2>Community Post</h2></div>
-          <div>
-            {post.map(post => (
-              <Link className='postLink' to={`/User/${post.user}`} key={post._id}>
+          <div className='postContainer'>
+            {post.slice().reverse().map(post => (
+              <Link className='postLink' to={`/viewPost/${post._id}`} key={post._id}>
                 <div key={post._id} className='singlePost' style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
-                  <span>Today's post by {post.user_name}: {post.title}</span>
+                  <Link className='userLink' to={`/user/${post.user}`}><span>Today's post by {post.user_name}: {post.title}</span></Link>
                   <span>{post.content}</span>
                 </div>
               </Link>
@@ -178,7 +160,5 @@ const Home = () => {
     </div>
   );
 };
-
-
 export default Home;
 

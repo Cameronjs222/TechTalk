@@ -319,6 +319,7 @@
 .allPost{
   margin: auto;
   font-family: 'Rozha One', serif;
+  overflow: scroll;
 }
 
 .hmFollow{
@@ -497,6 +498,30 @@ a{
 
 #inputTitle:-ms-input-placeholder{
   color: #a7a2a0;
+}
+
+.buttonContainerUserPage{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  color: #f5e7e0;
+  text-decoration-color: #e7e7e7;
+}
+
+.userLink {
+  color: #c66258;
+}
+
+.userLink:hover{
+  color: #802226;
+}
+
+.followerLink {
+  color: #f5e6e0;
+}
+
+.followerLink:hover{
+  color: #802226;
 }
 
 

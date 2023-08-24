@@ -5,7 +5,6 @@ import logo from '../img/logo2-4.jpg';
 
 const EditUser = (props) => {
     const { id } = useParams();
-
     const [loggedUser, setLoggedUser] = useState({
         name: "",
         email: "",
@@ -42,8 +41,10 @@ const EditUser = (props) => {
     const editUser = (e) => {
         e.preventDefault();
         axios.patch('http://localhost:8000/api/users/updateMe', loggedUser, { withCredentials: true })
-            .then(res => { setLoggedUser(res.data.user);
-                navigate("/home")})
+            .then(res => {
+                setLoggedUser(res.data.user);
+                navigate("/home")
+            })
             .catch(err => {
                 console.log(err)
                 if (err.response && err.response.data) {
@@ -74,35 +75,34 @@ const EditUser = (props) => {
             .catch(err => {
                 console.log(err)
             })
-
     }
 
     return (
 
 
-    <div className='mainFormUp'>
-        <div className='navBar'>
+        <div className='mainFormUp'>
+            <div className='navBar'>
                 <img src={logo} alt='Logo' id='logo2' />
                 <div className='navLinks'>
 
-                    <a href=""><button className='addP'>Add a Post</button></a>
+                    <a href="/create"><button className='addP'>Add a Post</button></a>
                     <a href="/home"><button className='allP'>All Posts</button></a>
                     <a href=""><button className='myP'>My Post</button></a>
 
                 </div>
                 <div className='userLink'>
-                    <p>Welcome <b>"{currentUser.name}Mark Jacobs"</b></p>
+                    <p>Welcome <b>"{currentUser.name}"</b></p>
                     <a href="/editUser"><button className='accInfo'>User Info</button></a>  <button onClick={logOut} className='logbutton'>Logout</button>
                 </div>
             </div>
 
-        <div className='formUp'>
-            <h1>UPDATE USER INFO</h1>
+            <div className='formUp'>
+                <h1>UPDATE USER INFO</h1>
                 <form className='logForm' onSubmit={editUser}>
-                {errors.error && <p className="error">{errors.error}</p>}
-                            {errors && errors.map((item, idx) => (
-                                <p key={idx} style={{ color: 'red' }}>**{item}</p>
-                            ))}
+                    {errors.error && <p className="error">{errors.error}</p>}
+                    {errors && errors.map((item, idx) => (
+                        <p key={idx} style={{ color: 'red' }}>**{item}</p>
+                    ))}
 
                     <div className="form-floating mb-3">
                         <input type="text" className="form-control" value={loggedUser.name} id="floatingInput" name='name' placeholder="name@example.com" onChange={onChangeHandler} />
@@ -126,8 +126,8 @@ const EditUser = (props) => {
                     <br />
                     <button type='submit' className='btn btn-dark'>Update</button>
                 </form>
+            </div>
         </div>
-    </div>
 
 
     )

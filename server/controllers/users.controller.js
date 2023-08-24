@@ -3,15 +3,12 @@ const User = require('../models/users.model');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-
-
 // module.exports.createNewUser = (req, res) => {
 //     User.create(req.body)
 //     .then(newlyCreatedUser => res.json({user: newlyCreatedUser}))
 //     .catch(err => res.json({message: "Something went wrong", error: err}));
 // }
 module.exports = {
-
     findAllUsers: (req, res) => {
         User.find()
             .then((allUsers) => res.json({ users: allUsers }))
@@ -98,8 +95,6 @@ module.exports = {
         }
     },
 
-
-
     updateExistingUser: async (req, res) => {
         const token = req.cookies.userToken;
         if (!token) {
@@ -153,5 +148,3 @@ module.exports = {
     }
 
 }
-
-

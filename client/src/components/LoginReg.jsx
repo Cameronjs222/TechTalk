@@ -5,7 +5,7 @@ import axios from 'axios';
 
 
 
-const LoginReg = ({currentUser, setCurrentUser}) => {
+const LoginReg = ({ currentUser, setCurrentUser }) => {
 
     const [userLogin, setUserLogin] = useState({
         email: "",
@@ -13,7 +13,7 @@ const LoginReg = ({currentUser, setCurrentUser}) => {
     })
     const [errors, setErrors] = useState([])
 
-    
+
 
     const navigate = useNavigate();
 

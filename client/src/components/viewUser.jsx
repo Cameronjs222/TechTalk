@@ -12,14 +12,15 @@ const User = () => {
     const [post, setPost] = useState([]);
     const { userId } = useParams();
     const [user, setUser] = useState({})
+    const [following, setFollowing] = useState(false);
     const navigate = useNavigate();
 
-    console.log(user);
+    console.log(userId);
     console.log("^user^");
     console.log(currentUser);
     console.log("^currentUser^");
-    // console.log(post);
-    // console.log("^post^");
+    console.log(post);
+    console.log("^post^");
 
 
 
@@ -37,13 +38,17 @@ const User = () => {
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/users/me', { withCredentials: true })
-            .then(res => {
-                console.log(res)
-                setCurrentUser(res.data.user);
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        .then(res => {
+            console.log(res)
+            setCurrentUser(res.data.user);
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }, []);
+    
+    useEffect(() => {
+
 
         axios.get(`http://localhost:8000/api/users/${userId}`)
             .then(res => {
@@ -76,11 +81,21 @@ const User = () => {
                 console.log(err);
             });
 
-    }, []);
+
+        if (currentUser && currentUser.following && currentUser.following.includes(userId)) {
+            setFollowing(true);
+        }
+    }, [userId, currentUser]);
+
+    useEffect(() => {
+        if (currentUser && currentUser.following && currentUser.following.includes(userId)) {
+            setFollowing(true);
+        }
+    }, [currentUser, userId]);
 
     function followUser() {
 
-        if(currentUser.following.includes(user._id)) return;
+        if (currentUser.following.includes(user._id)) return;
 
         axios.patch(`http://localhost:8000/api/users/${currentUser._id}`, {
             following: [...currentUser.following, user._id]
@@ -130,22 +145,46 @@ const User = () => {
     }
 
 
+    const deletePost = (postId) => {
+        axios.delete(`http://localhost:8000/api/post/${postId}`)
+            .then(res => {
+                console.log(res);
+                const updatedPosts = currentUser.posts.filter(id => id !== postId);
+                axios.patch(`http://localhost:8000/api/users/${currentUser._id}`, {
+                    posts: updatedPosts
+                }, { withCredentials: true })
+                    .then(res => {
+                        console.log(res);
+                        setCurrentUser(prevUser => ({
+                            ...prevUser,
+                            posts: updatedPosts
+                        }));
+                        navigate("/home");
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+    
+
     return (
         <div className='mainDivHome'>
             <div className='navBar'>
                 <img src={logo} alt='Logo' id='logo2' />
                 <div className='navLinks'>
 
-                    <a href=""><button className='addP'>Add a Post</button></a>
-                    <a href=""><button className='allP'>All Posts</button></a>
-                    <a href="/viewPost"><button className='myP'>My Post</button></a>
+                    <a href="/create"><button className='addP'>Add a Post</button></a>
+                    <a href="/home"><button className='allP'>All Posts</button></a>
 
                 </div>
                 <div className='userLink'>
-
-                    <p>Welcome {currentUser.name} </p>
-                    <a href="/updateuser?">Update Account Info</a> | <button onClick={logOut}>Logout</button>
-
+                  
+                    <p>Welcome <b>"{currentUser.name}"</b></p>
+                    <a href="/editUser"><button className='accInfo'>User Info</button></a>  <button onClick={logOut} className='logbutton'>Logout</button>
 
                 </div>
             </div>
@@ -155,24 +194,44 @@ const User = () => {
                 <div className='allPost'>
                     <div className="comPost">
 
-                    {user._id === currentUser._id
-                        ? (<div className='comPost'><h2>My Post</h2></div>)
-                        : (<div className='comPost'><h2>{user.name}'s Post</h2></div>)
-                    }
-{user._id !== currentUser._id
-    ? (
-        <div className=''>
-            {currentUser.following.includes(user._id)
-                ? <button onClick={() => unfollowUser()} id='unfollowButton' className='addP'>unfollow</button>
-                : <button onClick={() => followUser()} id='followButton' className='addP'>follow</button>
-            }
-        </div>
-    )
-    : (
-        <div className='' style={{ display: 'none' }}>
-        </div>
-    )
-}
+                        {user._id === currentUser._id
+                            ? (<div className='comPost'><h2>My Post</h2></div>)
+                            : (<div className='comPost'><h2>{user.name}'s Post</h2></div>)
+                        }
+                        {user._id !== currentUser._id
+                            ? (
+                                <div className=''>
+                                    {following ? (
+                                        <button
+                                            onClick={() => {
+                                                unfollowUser();
+                                                setFollowing(false);
+                                            }}
+                                            id='unfollowButton'
+                                            className='addP'
+                                        >
+                                            Unfollow
+                                        </button>
+                                    ) : (
+                                        <button
+                                            onClick={() => {
+                                                followUser();
+                                                setFollowing(true);
+                                            }}
+                                            id='followButton'
+                                            className='addP'
+                                        >
+                                            Follow
+                                        </button>
+                                    )}
+
+                                </div>
+                            )
+                            : (
+                                <div className='' style={{ display: 'none' }}>
+                                </div>
+                            )
+                        }
                     </div>
                     <div>
                         {post.map(post => (
@@ -180,6 +239,27 @@ const User = () => {
                                 <div key={post._id} className='singlePost' style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
                                     <span>Today's post by {post.user_name}: {post.title}</span>
                                     <span>{post.content}</span>
+                                    {user._id === currentUser._id
+                                        ? (
+                                            <div className='buttonContainerUserPage'>
+                                                <button
+                                                    onClick={() => {
+                                                        deletePost(post._id);
+                                                    }}
+                                                    id='deleteButton'
+                                                    className='allP'
+                                                >
+                                                    Delete
+                                                </button>
+                                                <Link to={`/edit/${post._id}`}><button className='allP'>Edit</button></Link>
+
+                                            </div>
+                                        )
+                                        : (
+                                            <div className='' style={{ display: 'none' }}>
+                                            </div>
+                                        )
+                                    }
                                 </div>
                             </Link>
                         ))}

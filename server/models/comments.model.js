@@ -9,7 +9,13 @@ const commentSchema = new mongoose.Schema({
         type:String,
         required:[true, "Comment is required for submission"],
         minLength: [3, "Content must be at least 3 characters long"],
-    }
+    },
+    user_name:{
+        type:String,
+    },
+    date:{
+        type:Date,
+    },
     
 } , { timestamps:true });
 
