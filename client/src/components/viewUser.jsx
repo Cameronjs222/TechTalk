@@ -236,8 +236,9 @@ const User = () => {
                     <div>
                         {post.map(post => (
                             <Link className='postLink' to={`/viewPost/${post._id}`} key={post._id}>
-                                <div key={post._id} className='singlePost' style={{ border: '1px solid black', display: 'flex', justifyContent: "start", flexDirection: 'column', alignItems: "start", gap: "5px", padding: '10px' }}>
-                                    <span>Today's post by {post.user_name}: {post.title}</span>
+                                <div key={post._id} className='singlePost'>
+                                    <h2> {post.title}</h2>
+                                    <p>post by: {post.user_name}</p>
                                     <span>{post.content}</span>
                                     {user._id === currentUser._id
                                         ? (
