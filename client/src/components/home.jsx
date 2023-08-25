@@ -144,7 +144,7 @@ const Home = () => {
 
         <div className='allPost'>
 
-          <div className='comPost'><h2>Community Post</h2></div>
+          <div className='comPost'><h2>Community Posts</h2></div>
           <div className='postContainer' key={post._id}>
             {post.slice().reverse().map(post => (
               <Link className='postLink' to={`/viewPost/${post._id}`} key={post._id}>

@@ -208,7 +208,8 @@ const User = () => {
                                                 setFollowing(false);
                                             }}
                                             id='unfollowButton'
-                                            className='addP'
+                                            className='unFollowbutt'
+                                            
                                         >
                                             Unfollow
                                         </button>
@@ -219,7 +220,8 @@ const User = () => {
                                                 setFollowing(true);
                                             }}
                                             id='followButton'
-                                            className='addP'
+                                            className='buttFollow'
+                                           
                                         >
                                             Follow
                                         </button>
