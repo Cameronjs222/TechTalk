@@ -597,3 +597,19 @@ a{
   background-color: #f5e7e0;
 }
 
+.unFollowbutt,
+.buttFollow{
+  padding: 5px;
+  width: 130px;
+  border-radius: 25px;
+  background-color: #61dafb;
+  border: none;
+  box-shadow: 5px 5px 5px rgb(0, 0, 0);
+  margin-bottom: 10px;
+}
+.unFollowbutt{
+  background-color: rgb(83, 94, 131);
+  color: white;
+}
+
+
