@@ -30,6 +30,7 @@ const CreatePost = ({ setOnePost }) => {
         const currentDate = new Date();
 
         if (
+            currentUser.last_post &&
             lastPostDate.getDate() === currentDate.getDate() &&
             lastPostDate.getMonth() === currentDate.getMonth() &&
             lastPostDate.getFullYear() === currentDate.getFullYear()
