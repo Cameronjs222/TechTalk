@@ -144,19 +144,22 @@ const Home = () => {
 
         <div className='allPost'>
 
-          <div className='comPost'><h2>Community Post</h2></div>
-          <div className='postContainer'>
+          <div className='comPost'><h2>Community Posts</h2></div>
+          <div className='postContainer' key={post._id}>
             {post.slice().reverse().map(post => (
               <Link className='postLink' to={`/viewPost/${post._id}`} key={post._id}>
-                <div key={post._id} className='singlePost'>
-                  <Link className='userLink' to={`/user/${post.user}`}>
-                  <p className='comtitle'>
-                  Title:<b>"{post.title}</b>" <br />
-                  Today's post by: {post.user_name} <br />
-                  </p></Link>
+               
+                  <Link className='userLink2' to={`/user/${post.user}`}>
+                    <div className='comtitle'>
+                    <p className='titleinPost'><b>"{post.title}</b>" <br />
+                    post by: {post.user_name}</p>
+                    </div>
+                  </Link>
 
-                  <span>{post.content} <br /></span>
-                </div>
+                  <div className='singlePost2'>
+                    {post.content}
+                    </div>
+               
               </Link>
             ))}
           </div>

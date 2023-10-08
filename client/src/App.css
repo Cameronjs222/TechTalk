@@ -202,6 +202,8 @@
   z-index: 1;
   box-shadow: 5px 5px 5px gray;
   font-family: 'Raleway', sans-serif;
+  padding: 15px;
+
 }
 
 .friendPost{
@@ -320,7 +322,6 @@
   margin: auto;
   font-family: 'Rozha One', serif;
   height: 600px;
-  
 }
 
 .hmFollow{
@@ -386,6 +387,14 @@
   margin: 10px;
   padding: 10px;
   box-shadow: 5px 5px 5px gray;
+  border: 1px #c66358 solid;
+  font-family: 'Raleway', sans-serif;
+
+}
+
+.singlePost h2{
+  color: #802226;
+  font-weight: bolder;
 }
 
 .postLink{
@@ -527,12 +536,30 @@ a{
 
 .comtitle{
   text-align: left;
+  width: max-content;
+  background-color: #802226;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 1px;
+  margin-top: 10px;
+  border-radius: 35px;
+  position: relative;
+  z-index: 1;
+  left: 20px;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 5px 5px 5px gray;
+
 }
 
 .postContainer{
   overflow: auto;
   height: 530px;
+  background-color: #f5e7e0;
+  
 }
+
 
 .postContainer::-webkit-scrollbar {
   width: 10px;
@@ -548,3 +575,41 @@ a{
   border-radius: 8px;
   background-color: #c66358;
 }
+
+.singlePost2 {
+  
+  background-color: #f5e7e0;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px gray;
+  position: relative;
+  top: -40px;
+  left: 50px;
+  width: 85%;
+  padding: 10px;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  font-family: 'Inter', sans-serif;
+  border: 1px #c66358 solid;
+
+}
+
+.allPost{
+  background-color: #f5e7e0;
+}
+
+.unFollowbutt,
+.buttFollow{
+  padding: 5px;
+  width: 130px;
+  border-radius: 25px;
+  background-color: #61dafb;
+  border: none;
+  box-shadow: 5px 5px 5px rgb(0, 0, 0);
+  margin-bottom: 10px;
+}
+.unFollowbutt{
+  background-color: rgb(83, 94, 131);
+  color: white;
+}
+
+
